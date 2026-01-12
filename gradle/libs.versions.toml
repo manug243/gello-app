@@ -15,6 +15,7 @@ kotlin = "2.2.21"
 kotlinStdlib = "2.2.21"
 runner = "1.7.0"
 core = "1.7.0"
+forge = "0.2.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -30,6 +31,20 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
+
+forge-network-core-client = { module = "com.skash.forge:network-api-client", version.ref = "forge" }
+forge-network-core-response = { module = "com.skash.forge:network-api-response", version.ref = "forge" }
+forge-network-core-session = { module = "com.skash.forge:network-api-session", version.ref = "forge" }
+forge-network-ktor = { module = "com.skash.forge:network-ktor", version.ref = "forge" }
+forge-usecase = { module = "com.skash.forge:usecase", version.ref = "forge" }
+forge-datastore-api = { module = "com.skash.forge:datastore-api", version.ref = "forge" }
+forge-multiplatform-settings = { module = "com.skash.forge:datastore-multiplatform-settings", version.ref = "forge" }
+forge-viewmodel = { module = "com.skash.forge:viewmodel", version.ref = "forge" }
+forge-event = { module = "com.skash.forge:event", version.ref = "forge" }
+forge-compose-layout = { module = "com.skash.forge:compose-layout", version.ref = "forge" }
+forge-compose-event = { module = "com.skash.forge:compose-event", version.ref = "forge" }
+forge-compose-navigation-api = { module = "com.skash.forge:compose-navigation-api", version.ref = "forge" }
+forge-compose-navigation-nav2 = { module = "com.skash.forge:compose-navigation-nav2", version.ref = "forge" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
