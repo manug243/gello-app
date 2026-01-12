@@ -40,7 +40,7 @@ kotlin {
             baseName = xcfName
         }
     }
-    
+
     sourceSets {
         commonMain {
             dependencies {
