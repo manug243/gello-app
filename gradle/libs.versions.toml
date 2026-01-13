@@ -17,6 +17,7 @@ runner = "1.7.0"
 core = "1.7.0"
 forge = "0.2.1"
 koinBom = "4.1.1"
+material3 = "1.10.0-alpha04"
 
 [libraries]
 
@@ -38,6 +39,7 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
+material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 
 forge-network-core-client = { module = "com.skash.forge:network-api-client", version.ref = "forge" }
 forge-network-core-response = { module = "com.skash.forge:network-api-response", version.ref = "forge" }
