@@ -16,8 +16,15 @@ kotlinStdlib = "2.2.21"
 runner = "1.7.0"
 core = "1.7.0"
 forge = "0.2.1"
+koinBom = "4.1.1"
 
 [libraries]
+
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koinBom" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-compose = { module = "io.insert-koin:koin-compose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
+
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -41,10 +48,8 @@ forge-datastore-api = { module = "com.skash.forge:datastore-api", version.ref = 
 forge-multiplatform-settings = { module = "com.skash.forge:datastore-multiplatform-settings", version.ref = "forge" }
 forge-viewmodel = { module = "com.skash.forge:viewmodel", version.ref = "forge" }
 forge-event = { module = "com.skash.forge:event", version.ref = "forge" }
-forge-compose-layout = { module = "com.skash.forge:compose-layout", version.ref = "forge" }
-forge-compose-event = { module = "com.skash.forge:compose-event", version.ref = "forge" }
-forge-compose-navigation-api = { module = "com.skash.forge:compose-navigation-api", version.ref = "forge" }
-forge-compose-navigation-nav2 = { module = "com.skash.forge:compose-navigation-nav2", version.ref = "forge" }
+forge-compose-navigation-api = { module = "com.skash.forge:navigation-api", version.ref = "forge" }
+forge-compose-navigation-nav2 = { module = "com.skash.forge:navigation-nav2", version.ref = "forge" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
