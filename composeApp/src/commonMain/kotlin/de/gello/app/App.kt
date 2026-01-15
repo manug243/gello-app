@@ -1,49 +1,39 @@
 package de.gello.app
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import de.gello.app.di.appModule
+import de.gello.app.navigation.AppNavigation
+import de.gello.data.di.dataModule
+import de.gello.designsystem.component.CoveringProgressIndicator
+import de.gello.designsystem.theme.AppTheme
+import org.koin.compose.KoinMultiplatformApplication
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.dsl.koinConfiguration
 
-import gello.composeapp.generated.resources.Res
-import gello.composeapp.generated.resources.compose_multiplatform
+@OptIn(KoinExperimentalAPI::class)
+@Composable
+fun GelloApp() {
+    KoinMultiplatformApplication(
+        config = koinConfiguration {
+            modules(appModule + dataModule)
+        }
+    ) {
+        AppTheme {
+            val appViewModel = koinViewModel<AppViewModel>()
+            val state by appViewModel.collectStateFlow().collectAsState()
+
+            AppContent(
+                state = state
+            )
+        }
+    }
+}
 
 @Composable
-@Preview
-fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
-        }
+private fun AppContent(state: AppState) {
+    when (state) {
+        is AppState.Loaded -> AppNavigation(isLoggedIn = state.isLoggedIn)
+        is AppState.Loading -> CoveringProgressIndicator()
     }
 }
