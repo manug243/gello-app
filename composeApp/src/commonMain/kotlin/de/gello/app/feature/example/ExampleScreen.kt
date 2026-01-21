@@ -3,7 +3,7 @@ package de.gello.app.feature.example
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import de.gello.app.feature.example.view.ExamplePage
+import de.gello.app.feature.example.ui.ExamplePage
 import de.gello.designsystem.component.CoveringProgressIndicator
 import de.gello.designsystem.component.ScreenScaffold
 import org.koin.compose.viewmodel.koinViewModel
