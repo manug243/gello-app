@@ -11,7 +11,6 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.savedstate.savedState
 import com.skash.forge.event.EventBus
 import com.skash.forge.navigation.nav2.DefaultNavHost
 import de.gello.app.event.UIEvent

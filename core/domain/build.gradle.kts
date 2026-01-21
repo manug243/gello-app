@@ -47,8 +47,9 @@ kotlin {
                 implementation(projects.core.util)
 
                 implementation(libs.kotlin.stdlib)
+                implementation(libs.kotlinx.coroutines.core)
 
-                implementation(libs.forge.usecase)
+                api(libs.forge.usecase)
                 implementation(libs.forge.network.core.response)
                 implementation(libs.forge.network.core.client)
                 implementation(libs.forge.datastore.api)
