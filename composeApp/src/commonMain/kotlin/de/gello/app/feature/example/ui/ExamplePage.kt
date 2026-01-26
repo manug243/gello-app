@@ -14,7 +14,8 @@ import de.gello.designsystem.theme.Spacing
 
 @Composable
 internal fun ExamplePage(
-    executeIntent: (ExampleState.Intent) -> Unit
+    executeIntent: (ExampleState.Intent) -> Unit,
+    onExampleButtonClick: () -> Unit
 ) {
     // design of actual screen, we need to consider if we can use page, because of desktop
     Page(
@@ -29,9 +30,7 @@ internal fun ExamplePage(
         PrimaryButton(
             title = "Send snackbar message",
             isEnabled = true,
-            onClick = {
-                // potential intent call
-            }
+            onClick = onExampleButtonClick
         )
     }
 }

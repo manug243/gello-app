@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources>
+    <string name="placeholder_email">E-Mail</string>
+    <string name="placeholder_password">Passwort</string>
+
+    <string name="button_login">Anmelden</string>
+</resources>

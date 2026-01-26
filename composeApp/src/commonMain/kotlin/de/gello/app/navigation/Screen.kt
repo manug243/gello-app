@@ -6,4 +6,7 @@ import kotlinx.serialization.Serializable
 sealed interface Screen {
     @Serializable
     data object Graph : Screen
+
+    @Serializable
+    data object Example : Screen
 }

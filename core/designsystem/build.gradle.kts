@@ -42,6 +42,9 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
                 implementation(libs.material3)
+                implementation(compose.ui)
+                implementation(compose.material)
+                implementation(compose.materialIconsExtended)
             }
         }
     }

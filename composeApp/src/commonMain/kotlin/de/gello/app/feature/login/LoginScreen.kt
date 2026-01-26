@@ -5,7 +5,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import de.gello.app.event.UIEvent
 import de.gello.app.event.UIEventHandler
+import de.gello.app.feature.login.ui.LoginPage
 import de.gello.designsystem.component.CoveringProgressIndicator
+import de.gello.designsystem.component.ScreenScaffold
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -28,12 +30,32 @@ private fun LoginScreenImpl(
     UIEventHandler(
         uiEvents = events
     ) { snackBarHost ->
-        when (state) {
-            is LoginState.Loading -> CoveringProgressIndicator()
-            is LoginState.Default ->
-                DefaultsPage(
-
-                )
+        ScreenScaffold(
+            snackbarHost = snackBarHost
+        ) {
+            when (state) {
+                is LoginState.Loading -> CoveringProgressIndicator()
+                is LoginState.Default ->
+                    LoginPage(
+                        state = state,
+                        executeIntent = executeIntent,
+                        onEmailChange = {
+                            executeIntent(LoginState.Default.Intent.SetEmail(it))
+                        },
+                        onPasswordChange = {
+                            executeIntent(LoginState.Default.Intent.SetPassword(it))
+                        },
+                        onLoginClick = {
+                            executeIntent(LoginState.Default.Intent.LoginButton)
+                        },
+                        onClickForgetPassword = {
+                            executeIntent(LoginState.Intent.ToForgetPassword)
+                        },
+                        onClickRegister = {
+                            executeIntent(LoginState.Intent.ToRegistration)
+                        }
+                    )
+            }
         }
     }
 }

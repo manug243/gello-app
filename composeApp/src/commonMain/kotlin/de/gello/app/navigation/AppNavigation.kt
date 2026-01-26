@@ -28,7 +28,7 @@ fun AppNavigation(isLoggedIn: Boolean) {
             }
 
             navigation<Screen.Graph>(
-                startDestination = TopLevelScreen.Example
+                startDestination = Screen.Example
             ) {
                 appGraph()
             }
