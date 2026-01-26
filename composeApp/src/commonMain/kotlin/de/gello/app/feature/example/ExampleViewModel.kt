@@ -1,11 +1,14 @@
 package de.gello.app.feature.example
 
+import androidx.lifecycle.viewModelScope
 import de.gello.app.event.UIEvent
 import de.gello.app.util.BaseViewModel
+import de.gello.domain.usecase.LogoutUseCase
+import kotlinx.coroutines.launch
 
 // need to register in di
 class ExampleViewModel(
-    // usecase
+    private val logoutUseCase: LogoutUseCase
 ) : BaseViewModel<ExampleState, ExampleState.Intent>(
     initialState = ExampleState.Default()
 ) {
@@ -21,14 +24,21 @@ class ExampleViewModel(
                 intent = intent,
                 handler = ::handleSetTextFieldIntent
             )
+
+            is ExampleState.Default.Intent.LogoutButton -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleLogoutButton
+            )
         }
     }
 
-    private fun handleExampleButton(
+    private fun handleLogoutButton(
         state: ExampleState.Default,
-        intent: ExampleState.Default.Intent.ExampleButton
+        intent: ExampleState.Default.Intent.LogoutButton
     ) {
-        showSnackbar(state.textField)
+        viewModelScope.launch {
+            logoutUseCase
+        }
     }
 
     private fun handleSetTextFieldIntent(
