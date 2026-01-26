@@ -38,7 +38,6 @@ private fun LoginScreenImpl(
                 is LoginState.Default ->
                     LoginPage(
                         state = state,
-                        executeIntent = executeIntent,
                         onEmailChange = {
                             executeIntent(LoginState.Default.Intent.SetEmail(it))
                         },

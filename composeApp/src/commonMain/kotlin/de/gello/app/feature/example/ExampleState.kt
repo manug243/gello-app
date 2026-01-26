@@ -15,6 +15,7 @@ sealed interface ExampleState {
             // possible text field, buttons etc
             data object ExampleButton : Intent
             data class SetExampleTextField(val value: String) : Intent
+            data object LogoutButton : Intent
         }
     }
 }

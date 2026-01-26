@@ -38,9 +38,15 @@ private fun ExampleScreenImpl(
                 is ExampleState.Loading -> CoveringProgressIndicator()
                 is ExampleState.Default ->
                     ExamplePage(
-                        executeIntent = executeIntent,
+                        state = state,
+                        onTextFieldChange = {
+                            executeIntent(ExampleState.Default.Intent.SetExampleTextField(it))
+                        },
                         onExampleButtonClick = {
                             executeIntent(ExampleState.Default.Intent.ExampleButton)
+                        },
+                        onLogoutClick = {
+
                         }
                     )
             }

@@ -23,7 +23,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun LoginPage(
     state: LoginState.Default,
-    executeIntent: (LoginState.Intent) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
@@ -36,7 +35,6 @@ internal fun LoginPage(
     ) {
         LoginForm(
             state = state,
-            executeIntent = executeIntent,
             onEmailChange = onEmailChange,
             onPasswordChange = onPasswordChange,
             onClickForgetPassword = onClickForgetPassword
@@ -55,7 +53,6 @@ internal fun LoginPage(
 @Composable
 private fun LoginForm(
     state: LoginState.Default,
-    executeIntent: (LoginState.Intent) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onClickForgetPassword: () -> Unit

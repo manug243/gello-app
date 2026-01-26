@@ -19,6 +19,7 @@ import de.gello.app.feature.login.LoginViewModel
 import de.gello.data.session.SessionManager
 import de.gello.data.session.TokenAuthenticatorImpl
 import de.gello.domain.usecase.LoginUseCase
+import de.gello.domain.usecase.LogoutUseCase
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
@@ -57,4 +58,5 @@ val appModule = module {
 
     factory { ObserveIsUserLoggedInUseCase(get()) }
     factory { LoginUseCase(get(), get()) }
+    factory { LogoutUseCase(get(), get()) }
 }
