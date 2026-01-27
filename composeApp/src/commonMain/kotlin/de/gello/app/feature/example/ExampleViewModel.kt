@@ -1,6 +1,7 @@
 package de.gello.app.feature.example
 
 import androidx.lifecycle.viewModelScope
+import com.skash.forge.usecase.invoke
 import de.gello.app.event.UIEvent
 import de.gello.app.util.BaseViewModel
 import de.gello.domain.usecase.LogoutUseCase
@@ -37,7 +38,7 @@ class ExampleViewModel(
         intent: ExampleState.Intent.Logout
     ) {
         viewModelScope.launch {
-            logoutUseCase
+            logoutUseCase()
         }
     }
 
