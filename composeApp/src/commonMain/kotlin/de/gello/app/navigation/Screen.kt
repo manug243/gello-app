@@ -9,4 +9,7 @@ sealed interface Screen {
 
     @Serializable
     data object Example : Screen
+
+    @Serializable
+    data object Overview : Screen
 }

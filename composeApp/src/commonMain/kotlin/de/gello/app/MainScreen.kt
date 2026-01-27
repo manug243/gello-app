@@ -1,6 +1,7 @@
 package de.gello.app
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Note
 import androidx.compose.material.icons.filled.Doorbell
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -41,6 +42,7 @@ fun MainScreen() {
     }
 
     val tabs = listOf(
+        BottomNavItem("Overview", TopLevelScreen.Overview, Icons.AutoMirrored.Default.Note),
         BottomNavItem("Example", TopLevelScreen.Example, Icons.Default.Doorbell)
     )
 
@@ -69,7 +71,7 @@ fun MainScreen() {
         ) {
             DefaultNavHost(
                 navController = navController,
-                startDestination = TopLevelScreen.Example
+                startDestination = TopLevelScreen.Overview
             ) {
                 topLevelGraph()
             }
