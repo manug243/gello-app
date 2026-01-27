@@ -5,6 +5,8 @@ import androidx.navigation.compose.composable
 import com.skash.forge.navigation.nav2.composableWithTransition
 import de.gello.app.feature.example.ExampleScreen
 import de.gello.app.feature.example.ExampleViewModel
+import de.gello.app.feature.overview.OverviewScreen
+import de.gello.app.feature.overview.OverviewViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 fun NavGraphBuilder.topLevelGraph() {
@@ -17,5 +19,10 @@ fun NavGraphBuilder.topLevelGraph() {
     composable<TopLevelScreen.Example> {
         val viewModel = koinViewModel<ExampleViewModel>()
         ExampleScreen(viewmodel = viewModel)
+    }
+
+    composable<TopLevelScreen.Overview> {
+        val viewModel = koinViewModel<OverviewViewModel>()
+        OverviewScreen(viewmodel = viewModel)
     }
 }

@@ -9,4 +9,7 @@ sealed interface TopLevelScreen : Screen {
 
     @Serializable
     data object Example : TopLevelScreen
+
+    @Serializable
+    data object Overview : TopLevelScreen
 }
