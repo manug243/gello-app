@@ -59,6 +59,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.androidx.room.runtime)
                 implementation(libs.sqlite.bundled)
+                implementation(libs.material3)
 
                 implementation(libs.forge.network.core.session)
                 implementation(libs.forge.network.core.client)
