@@ -2,7 +2,7 @@ package de.gello.app.feature.example
 
 sealed interface ExampleState {
     sealed interface Intent {
-        // possible navigation
+        data object Logout : Default.Intent
     }
 
     data object Loading : ExampleState
@@ -15,7 +15,6 @@ sealed interface ExampleState {
             // possible text field, buttons etc
             data object ExampleButton : Intent
             data class SetExampleTextField(val value: String) : Intent
-            data object LogoutButton : Intent
         }
     }
 }

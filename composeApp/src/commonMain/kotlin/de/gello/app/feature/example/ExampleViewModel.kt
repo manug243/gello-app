@@ -15,6 +15,11 @@ class ExampleViewModel(
     override fun executeIntent(intent: ExampleState.Intent) {
         when (intent) {
             // need to list all intents
+            is ExampleState.Intent.Logout -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleLogoutButton
+            )
+
             is ExampleState.Default.Intent.ExampleButton ->
                 sendUIEvent(
                     UIEvent.Snackbar("Example action")
@@ -24,17 +29,12 @@ class ExampleViewModel(
                 intent = intent,
                 handler = ::handleSetTextFieldIntent
             )
-
-            is ExampleState.Default.Intent.LogoutButton -> handleIntent<_, _>(
-                intent = intent,
-                handler = ::handleLogoutButton
-            )
         }
     }
 
     private fun handleLogoutButton(
-        state: ExampleState.Default,
-        intent: ExampleState.Default.Intent.LogoutButton
+        state: ExampleState,
+        intent: ExampleState.Intent.Logout
     ) {
         viewModelScope.launch {
             logoutUseCase
