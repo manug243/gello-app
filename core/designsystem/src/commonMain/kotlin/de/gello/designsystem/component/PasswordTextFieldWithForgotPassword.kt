@@ -81,7 +81,7 @@ fun PasswordTextFieldWithForgotPassword(
             modifier = Modifier.align(Alignment.End),
             onClick = onForgotPasswordClick,
         ) {
-            Text(text = "Passwort vergessen?", textDecoration = TextDecoration.Underline)
+            Text(text = "Forgot password?", textDecoration = TextDecoration.Underline)
         }
     }
 }

@@ -5,7 +5,7 @@ import com.skash.forge.network.response.ApiResponse
 sealed class ErrorType(
     open val message: String
 ) {
-    data object UnauthorizedAccess : ErrorType(message = "Überprüfe deine Anmeldedaten")
+    data object UnauthorizedAccess : ErrorType(message = "Invalid credentials")
 
     data class Serialization(override val message: String) : ErrorType(message)
 
