@@ -9,14 +9,34 @@ import de.gello.domain.repository.UserRepository
 class UserRepositoryImpl(
     private val httpClient: HttpClient
 ) : UserRepository {
+
+    // for testing
     override suspend fun fetchSelfUser(): ApiResponse<User> {
-        TODO("Not yet implemented")
+        return ApiResponse.Success(
+            User(
+                id = 1,
+                email = "TestUser@gello.com"
+            )
+        )
     }
 
+    // for testing
     override suspend fun authenticateUser(
         email: String,
         password: String
     ): ApiResponse<Token> {
-        TODO("Not yet implemented")
+        return if (email == "admin" && password == "admin") {
+            ApiResponse.Success(
+                Token(
+                    token = "fake-access-token",
+                    refreshToken = "fake-refresh-token"
+                )
+            )
+        } else {
+            ApiResponse.Error.Unspecified(
+                code = 500,
+                reason = "Test, wrong input"
+            )
+        }
     }
 }

@@ -39,10 +39,10 @@ class LoginViewModel(
                     handler = ::handleSetPasswordIntent
                 )
 
-            is LoginState.Default.Intent.LoginButton ->
-                sendUIEvent(
-                    UIEvent.Snackbar("Not implemented yet")
-                )
+            is LoginState.Default.Intent.LoginButton -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleLoginButton
+            )
         }
 
     private fun handleSetEmailIntent(

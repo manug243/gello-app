@@ -46,7 +46,7 @@ private fun ExampleScreenImpl(
                             executeIntent(ExampleState.Default.Intent.ExampleButton)
                         },
                         onLogoutClick = {
-
+                            executeIntent(ExampleState.Intent.Logout)
                         }
                     )
             }
