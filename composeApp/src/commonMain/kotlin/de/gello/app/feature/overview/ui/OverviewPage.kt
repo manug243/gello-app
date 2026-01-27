@@ -2,6 +2,7 @@ package de.gello.app.feature.overview.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -53,6 +54,41 @@ internal fun OverviewPage(
                 colorIndicator = Color.Yellow,
                 title = "Project T",
                 date = "12/12/2025",
+                onClick = {}
+            )
+
+            ProjectCard(
+                colorIndicator = Color.Cyan,
+                title = "Project A",
+                date = "27/01/2026",
+                onClick = {}
+            )
+
+            ProjectCard(
+                colorIndicator = Color.Green,
+                title = "Project V",
+                date = "19/04/2024",
+                onClick = {}
+            )
+
+            ProjectCard(
+                colorIndicator = Color.Magenta,
+                title = "Project X",
+                date = "14/01/2026",
+                onClick = {}
+            )
+
+            ProjectCard(
+                colorIndicator = Color.Yellow,
+                title = "Project T",
+                date = "12/12/2025",
+                onClick = {}
+            )
+
+            ProjectCard(
+                colorIndicator = Color.Cyan,
+                title = "Project A",
+                date = "27/01/2026",
                 onClick = {}
             )
         }
