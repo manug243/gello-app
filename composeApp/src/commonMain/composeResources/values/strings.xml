@@ -2,7 +2,7 @@
 
 <resources>
     <string name="placeholder_email">E-Mail</string>
-    <string name="placeholder_password">Passwort</string>
+    <string name="placeholder_password">Password</string>
 
-    <string name="button_login">Anmelden</string>
+    <string name="button_login">Login</string>
 </resources>
