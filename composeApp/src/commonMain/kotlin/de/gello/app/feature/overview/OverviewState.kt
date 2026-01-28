@@ -2,7 +2,7 @@ package de.gello.app.feature.overview
 
 sealed interface OverviewState {
     sealed interface Intent {
-        // TODO navigate to project
+        data object NavigateToCreateProject : Intent
     }
 
     data object Loading : OverviewState

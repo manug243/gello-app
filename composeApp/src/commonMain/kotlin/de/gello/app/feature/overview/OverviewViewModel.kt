@@ -1,5 +1,6 @@
 package de.gello.app.feature.overview
 
+import de.gello.app.event.UIEvent
 import de.gello.app.util.BaseViewModel
 
 class OverviewViewModel(
@@ -10,8 +11,10 @@ class OverviewViewModel(
 ) {
     override fun executeIntent(intent: OverviewState.Intent) {
         when (intent) {
-            // TODO add intents
-            else -> {} // needs to be removed, when intents are added
+            is OverviewState.Intent.NavigateToCreateProject -> {
+                //needs to changed to a dispatch event later on
+                sendUIEvent(UIEvent.Snackbar("Not implemented yet"))
+            }
         }
     }
 }
