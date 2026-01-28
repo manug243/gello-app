@@ -1,9 +1,9 @@
 package de.gello.app.feature.overview
 
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -35,7 +35,19 @@ private fun OverviewScreenImpl(
         uiEvents = events
     ) { snackBarHost ->
         ScreenScaffold(
-            snackbarHost = snackBarHost
+            snackbarHost = snackBarHost,
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+                        executeIntent(OverviewState.Intent.NavigateToCreateProject)
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = null
+                    )
+                }
+            }
         ) {
             when (state) {
                 is OverviewState.Loading -> CoveringProgressIndicator()
