@@ -36,10 +36,7 @@ fun ProjectCard(
             .fillMaxWidth()
             .height(60.dp)
             .clickable(onClick = onClick),
-        elevation = CardDefaults.cardElevation(defaultElevation = Spacing.Medium),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        )
+        elevation = CardDefaults.cardElevation(defaultElevation = Spacing.Medium)
     ) {
         Row(
             modifier = Modifier
