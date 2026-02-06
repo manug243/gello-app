@@ -1,18 +1,15 @@
 package de.gello.app
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Note
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Doorbell
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -27,12 +24,14 @@ import de.gello.app.navigation.BottomNavItem
 import de.gello.app.navigation.TopLevelScreen
 import de.gello.app.navigation.topLevelGraph
 import de.gello.designsystem.component.BottomNavigationBar
+import de.gello.designsystem.component.FAB
 import de.gello.designsystem.component.ScreenScaffold
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(viewmodel: AppViewModel) {
+    val state by viewmodel.collectStateFlow().collectAsState()
     val navController = rememberNavController()
     val eventBus = koinInject<EventBus<UIEvent>>()
 
@@ -88,19 +87,10 @@ fun MainScreen() {
             },
             snackbarHost = snackBarHost,
             floatingActionButton = {
-                AnimatedVisibility(
-                    visible = isOverviewScreen,
-                    enter = fadeIn(),
-                    exit = fadeOut()
-                ) {
-                    FloatingActionButton(
-                        onClick = {}
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = null
-                        )
-                    }
+                AnimatedVisibility(visible = isOverviewScreen) {
+                    FAB(
+                        onClick = { viewmodel.executeIntent(AppState.Intent.NavigateToCreateJournal) }
+                    )
                 }
             }
         ) {

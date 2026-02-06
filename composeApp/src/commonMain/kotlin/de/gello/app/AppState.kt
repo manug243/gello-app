@@ -1,7 +1,9 @@
 package de.gello.app
 
 sealed interface AppState {
-    sealed interface Intent
+    sealed interface Intent {
+        data object NavigateToCreateJournal : Intent
+    }
 
     data object Loading : AppState
 
