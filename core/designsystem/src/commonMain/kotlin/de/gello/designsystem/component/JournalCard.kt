@@ -37,6 +37,7 @@ fun JournalCard(
     title: String,
     owner: String,
     updatedAt: String,
+    entryCount: Int,
     onClick: () -> Unit
 ) {
     val color = parseHexColor(colorIndicator)
@@ -72,7 +73,7 @@ fun JournalCard(
             )
 
             Text(
-                text = "2",
+                text = entryCount.toString(),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
