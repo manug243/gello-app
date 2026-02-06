@@ -36,6 +36,25 @@ fun Page(
 }
 
 @Composable
+fun PageWithPaddingSlot(
+    modifier: Modifier = Modifier,
+    padding: PaddingValues = PaddingValues(Spacing.Medium),
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    autoClearFocus: Boolean = true,
+    content: @Composable ColumnScope.(padding: PaddingValues) -> Unit,
+) {
+    BasePage(
+        modifier = modifier,
+        verticalArrangement = verticalArrangement,
+        horizontalAlignment = horizontalAlignment,
+        autoClearFocus = autoClearFocus,
+    ) {
+        content(padding)
+    }
+}
+
+@Composable
 private fun BasePage(
     modifier: Modifier = Modifier,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,

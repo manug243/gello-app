@@ -1,17 +1,24 @@
 package de.gello.app
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Note
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Doorbell
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.skash.forge.event.EventBus
 import com.skash.forge.navigation.nav2.DefaultNavHost
 import de.gello.app.event.UIEvent
@@ -23,6 +30,7 @@ import de.gello.designsystem.component.BottomNavigationBar
 import de.gello.designsystem.component.ScreenScaffold
 import org.koin.compose.koinInject
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
@@ -46,11 +54,22 @@ fun MainScreen() {
         BottomNavItem("Example", TopLevelScreen.Example, Icons.Default.Doorbell)
     )
 
+    val selectedTab = tabs.findSelectedTabForDestination(currentDestination)
+
+    val tabTitle = selectedTab.title
+
+    val isOverviewScreen = selectedTab.route == TopLevelScreen.Overview
+
     UIEventHandler(
         uiEvents = eventBus.events
     ) { snackBarHost ->
 
         ScreenScaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(tabTitle) }
+                )
+            },
             bottomBar = {
                 BottomNavigationBar(
                     items = tabs,
@@ -67,7 +86,23 @@ fun MainScreen() {
                     onItemSelect = onTabClicked
                 )
             },
-            snackbarHost = snackBarHost
+            snackbarHost = snackBarHost,
+            floatingActionButton = {
+                AnimatedVisibility(
+                    visible = isOverviewScreen,
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    FloatingActionButton(
+                        onClick = {}
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = null
+                        )
+                    }
+                }
+            }
         ) {
             DefaultNavHost(
                 navController = navController,
