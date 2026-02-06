@@ -5,14 +5,39 @@ data class Journal(
     val title: String,
     val color: String,
     val owner: String,
-    val updatedAt: String
+    val updatedAt: String,
+    val entries: List<Entry>? = emptyList()
 ) {
     companion object {
         val mocks = listOf(
-            Journal(1, "Journal Alpha", "#FF5252", "Max Muster", "12/12/23"),
-            Journal(2, "Journal Beta", "#448AFF", "Lisa Example", "15/01/24"),
-            Journal(3, "Journal Gamma", "#69F0AE", "Fabian Brüns", "27/01/26"),
-            Journal(4, "Journal Delta", "#FFD740", "Anna Schmidt", "01/02/26"),
+            Journal(1, "Journal Alpha", "#FF5252", "Max Muster", "12/12/23", Entry.mocks),
+            Journal(
+                2,
+                "Journal Beta",
+                "#448AFF",
+                "Lisa Example",
+                "15/01/24",
+                listOf(Entry("1", "1", "1"))
+            ),
+            Journal(
+                3,
+                "Journal Gamma",
+                "#69F0AE",
+                "Fabian Brüns",
+                "27/01/26",
+                listOf(
+                    Entry("1", "1", "1"),
+                    Entry("1", "1", "1"),
+                    Entry("1", "1", "1"),
+                    Entry("1", "1", "1")
+                )
+            ),
+            Journal(
+                4, "Journal Delta", "#FFD740", "Anna Schmidt", "01/02/26", listOf(
+                    Entry("1", "1", "1"),
+                    Entry("1", "1", "1")
+                )
+            ),
             Journal(5, "Journal Epsilon", "#B388FF", "John Doe", "05/02/26"),
             Journal(6, "Daily Notes", "#FF8A65", "Clara Weber", "07/02/26"),
             Journal(7, "Project Phoenix", "#4DB6AC", "Tom Fischer", "08/02/26"),

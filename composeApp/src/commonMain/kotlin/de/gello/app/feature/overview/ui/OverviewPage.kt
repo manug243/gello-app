@@ -34,6 +34,7 @@ internal fun OverviewPage(
                     title = journal.title,
                     owner = journal.owner,
                     updatedAt = journal.updatedAt,
+                    entryCount = journal.entries?.count() ?: 0,
                     onClick = {}
                 )
             }
