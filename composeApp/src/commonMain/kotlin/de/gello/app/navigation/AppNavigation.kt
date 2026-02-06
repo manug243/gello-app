@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.skash.forge.navigation.NavigationDispatcher
 import com.skash.forge.navigation.nav2.CollectNavigationEvents
 import com.skash.forge.navigation.nav2.DefaultNavHost
+import de.gello.app.AppViewModel
 import de.gello.app.MainScreen
 import org.koin.compose.koinInject
 
@@ -34,7 +35,8 @@ fun AppNavigation(isLoggedIn: Boolean) {
             }
 
             composable<TopLevelScreen.Graph> {
-                MainScreen()
+                val viewModel = koinInject<AppViewModel>()
+                MainScreen(viewmodel = viewModel)
             }
         }
     )

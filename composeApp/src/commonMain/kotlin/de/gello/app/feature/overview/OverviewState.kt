@@ -3,9 +3,7 @@ package de.gello.app.feature.overview
 import de.gello.domain.model.Journal
 
 sealed interface OverviewState {
-    sealed interface Intent {
-        data object NavigateToCreateProject : Intent
-    }
+    sealed interface Intent
 
     data object Loading : OverviewState
 
