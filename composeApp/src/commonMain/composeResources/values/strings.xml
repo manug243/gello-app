@@ -5,4 +5,11 @@
     <string name="placeholder_password">Password</string>
 
     <string name="button_login">Login</string>
+    <string name="button_registration">Need to register?</string>
+    <string name="button_register">Register</string>
+
+    <string name="registration_header_title">Join Gello and Track Your Experiments</string>
+    <string name="registration_header_subtitle">Your Lab Journal in one app – organize projects, track experiments, and analyze gels effortlessly!</string>
+    <string name="registration_success_title">You're All Set</string>
+    <string name="registration_success_subtitle">Your registration was successful. Dive into your lab projects and get started.</string>
 </resources>

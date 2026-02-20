@@ -1,8 +1,11 @@
 package de.gello.app.feature.auth.login
 
 import androidx.lifecycle.viewModelScope
+import com.skash.forge.navigation.NavigationEvent
 import com.skash.forge.outcome.collectOutcome
 import de.gello.app.event.UIEvent
+import de.gello.app.navigation.AuthScreen
+import de.gello.app.navigation.Screen
 import de.gello.app.util.BaseViewModel
 import de.gello.domain.usecase.LoginUseCase
 import kotlinx.coroutines.launch
@@ -22,8 +25,8 @@ class LoginViewModel(
                 )
 
             is LoginState.Intent.ToRegistration ->
-                sendUIEvent(
-                    UIEvent.Snackbar("Not implemented yet")
+                dispatchNavigationEvent(
+                    NavigationEvent.NavigateTo(AuthScreen.Register)
                 )
 
             is LoginState.Default.Intent.SetUsername ->

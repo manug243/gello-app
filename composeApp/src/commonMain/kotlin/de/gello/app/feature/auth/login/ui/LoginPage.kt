@@ -21,11 +21,13 @@ import de.gello.app.feature.auth.login.LoginState
 import de.gello.designsystem.component.Page
 import de.gello.designsystem.component.PasswordTextFieldWithForgotPassword
 import de.gello.designsystem.component.PrimaryButton
+import de.gello.designsystem.component.SecondaryButton
 import de.gello.designsystem.component.TextField
 import de.gello.designsystem.theme.Spacing
 import gello.composeapp.generated.resources.Res
 import gello.composeapp.generated.resources.appicon
 import gello.composeapp.generated.resources.button_login
+import gello.composeapp.generated.resources.button_registration
 import gello.composeapp.generated.resources.placeholder_password
 import gello.composeapp.generated.resources.placeholder_username
 import org.jetbrains.compose.resources.painterResource
@@ -56,10 +58,9 @@ internal fun LoginPage(
 
         Spacer(Modifier.weight(1f))
 
-        PrimaryButton(
-            title = stringResource(Res.string.button_login),
-            isEnabled = true,
-            onClick = onLoginClick
+        ButtonGroup(
+            onClickLogin = onLoginClick,
+            onClickRegister = onClickRegister
         )
     }
 }
@@ -109,6 +110,28 @@ private fun LoginForm(
             onPasswordChange = onPasswordChange,
             imeAction = ImeAction.Done,
             onForgotPasswordClick = onClickForgetPassword
+        )
+    }
+}
+
+@Composable
+private fun ButtonGroup(
+    onClickLogin: () -> Unit,
+    onClickRegister: () -> Unit
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
+    ) {
+        PrimaryButton(
+            title = stringResource(Res.string.button_login),
+            isEnabled = true,
+            onClick = onClickLogin
+        )
+
+        SecondaryButton(
+            title = stringResource(Res.string.button_registration),
+            isEnabled = true,
+            onClick = onClickRegister
         )
     }
 }
