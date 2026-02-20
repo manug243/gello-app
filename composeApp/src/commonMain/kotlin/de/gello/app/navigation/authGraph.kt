@@ -2,8 +2,8 @@ package de.gello.app.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import de.gello.app.feature.login.LoginScreen
-import de.gello.app.feature.login.LoginViewModel
+import de.gello.app.feature.auth.login.LoginScreen
+import de.gello.app.feature.auth.login.LoginViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 fun NavGraphBuilder.authGraph() {
