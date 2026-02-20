@@ -9,4 +9,7 @@ sealed interface AuthScreen : Screen {
 
     @Serializable
     data object Login : AuthScreen
+
+   @Serializable
+    data object Register : AuthScreen
 }

@@ -1,5 +1,6 @@
 package de.gello.app.di
 
+import com.russhwolf.settings.ExperimentalSettingsApi
 import com.skash.forge.datastore.DataStore
 import com.skash.forge.datastore.multiplatformsettings.MultiplatformSettingsDataStore
 import com.skash.forge.event.DefaultEventBus
@@ -16,20 +17,24 @@ import de.gello.app.AppViewModel
 import de.gello.app.event.UIEvent
 import de.gello.app.feature.example.ExampleViewModel
 import de.gello.app.feature.auth.login.LoginViewModel
+import de.gello.app.feature.auth.registration.RegistrationViewModel
 import de.gello.app.feature.overview.OverviewViewModel
 import de.gello.data.session.SessionManager
 import de.gello.data.session.TokenAuthenticatorImpl
 import de.gello.domain.usecase.LoginUseCase
 import de.gello.domain.usecase.LogoutUseCase
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
+import de.gello.domain.usecase.RegisterUserUseCase
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
+@OptIn(ExperimentalSettingsApi::class)
 val appModule = module {
 
     viewModelOf(::AppViewModel)
     viewModelOf(::LoginViewModel)
+    viewModelOf(::RegistrationViewModel)
     viewModelOf(::ExampleViewModel)
     viewModelOf(::OverviewViewModel)
 
@@ -61,4 +66,5 @@ val appModule = module {
     factory { ObserveIsUserLoggedInUseCase(get()) }
     factory { LoginUseCase(get(), get()) }
     factory { LogoutUseCase(get(), get()) }
+    factory { RegisterUserUseCase(get()) }
 }

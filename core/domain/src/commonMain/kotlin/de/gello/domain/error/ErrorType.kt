@@ -14,6 +14,8 @@ sealed class ErrorType(
     data class Http(override val message: String) : ErrorType(message)
 
     data class Custom(override val message: String) : ErrorType(message = message)
+
+    data object RegistrationFailed : ErrorType("Registration failed")
 }
 
 inline fun ApiResponse.Error.toErrorType(defaultErrorType: ApiResponse.Error.Unspecified.() -> ErrorType): ErrorType =

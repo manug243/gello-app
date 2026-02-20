@@ -1,18 +1,18 @@
 package de.gello.designsystem.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun PrimaryButton(
+fun SecondaryButton(
     title: String,
     isEnabled: Boolean,
     onClick: () -> Unit
 ) {
-    Button(
+    OutlinedButton(
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick,
         enabled = isEnabled
