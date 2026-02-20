@@ -16,7 +16,7 @@ class LoginUseCase(
 ) : FlowOutcomeUseCase<LoginUseCase.Params, User, ErrorType>() {
 
     data class Params(
-        val email: String,
+        val username: String,
         val password: String
     )
 
@@ -24,7 +24,7 @@ class LoginUseCase(
         params: Params
     ) {
         val result = userRepository
-            .authenticateUser(params.email, params.password)
+            .authenticateUser(params.username, params.password)
             .flatMap { token ->
                 sessionRepository.setAuthToken(token.token)
                 sessionRepository.setRefreshToken(token.refreshToken)

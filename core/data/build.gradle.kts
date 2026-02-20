@@ -1,8 +1,12 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
     alias(libs.plugins.room)
+    alias(libs.plugins.buildkonfig)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.ksp)
 }
@@ -93,8 +97,20 @@ kotlin {
     }
 }
 
+buildkonfig {
+    packageName = "de.gello"
+    defaultConfigs {
+        buildConfigField(STRING, "BASE_URL", "http://192.168.2.40:8080/api") //needs to be changed to actual server ip or your network ip for testing
+    }
+}
+
 room {
     schemaDirectory("$project/schemas")
+}
+
+
+ksp {
+    arg("KOIN_CONFIG_CHECK", "true")
 }
 
 dependencies {
@@ -102,4 +118,10 @@ dependencies {
     add("kspIosSimulatorArm64", libs.androidx.room.compiler)
     add("kspIosX64", libs.androidx.room.compiler)
     add("kspIosArm64", libs.androidx.room.compiler)
+}
+
+project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }

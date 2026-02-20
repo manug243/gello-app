@@ -1,4 +1,4 @@
-package de.gello.app.feature.login
+package de.gello.app.feature.auth.login
 
 sealed interface LoginState {
     sealed interface Intent {
@@ -10,12 +10,12 @@ sealed interface LoginState {
     data object Loading : LoginState
 
     data class Default(
-        val email: String = "",
+        val username: String = "",
         val password: String = "",
         val showError: Boolean = false
     ) : LoginState {
         sealed interface Intent : LoginState.Intent {
-            data class SetEmail(val value: String) : Intent
+            data class SetUsername(val value: String) : Intent
             data class SetPassword(val value: String) : Intent
             data object LoginButton : Intent
         }

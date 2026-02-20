@@ -1,11 +1,11 @@
-package de.gello.app.feature.login
+package de.gello.app.feature.auth.login
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import de.gello.app.event.UIEvent
 import de.gello.app.event.UIEventHandler
-import de.gello.app.feature.login.ui.LoginPage
+import de.gello.app.feature.auth.login.ui.LoginPage
 import de.gello.designsystem.component.CoveringProgressIndicator
 import de.gello.designsystem.component.ScreenScaffold
 import kotlinx.coroutines.flow.Flow
@@ -38,8 +38,8 @@ private fun LoginScreenImpl(
                 is LoginState.Default ->
                     LoginPage(
                         state = state,
-                        onEmailChange = {
-                            executeIntent(LoginState.Default.Intent.SetEmail(it))
+                        onUsernameChange = {
+                            executeIntent(LoginState.Default.Intent.SetUsername(it))
                         },
                         onPasswordChange = {
                             executeIntent(LoginState.Default.Intent.SetPassword(it))
