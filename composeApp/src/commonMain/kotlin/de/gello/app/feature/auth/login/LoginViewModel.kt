@@ -1,7 +1,6 @@
-package de.gello.app.feature.login
+package de.gello.app.feature.auth.login
 
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skash.forge.outcome.collectOutcome
 import de.gello.app.event.UIEvent
 import de.gello.app.util.BaseViewModel
@@ -27,10 +26,10 @@ class LoginViewModel(
                     UIEvent.Snackbar("Not implemented yet")
                 )
 
-            is LoginState.Default.Intent.SetEmail ->
+            is LoginState.Default.Intent.SetUsername ->
                 handleIntent<_, _>(
                     intent = intent,
-                    handler = ::handleSetEmailIntent
+                    handler = ::handleSetUsernameIntent
                 )
 
             is LoginState.Default.Intent.SetPassword ->
@@ -45,11 +44,11 @@ class LoginViewModel(
             )
         }
 
-    private fun handleSetEmailIntent(
+    private fun handleSetUsernameIntent(
         state: LoginState.Default,
-        intent: LoginState.Default.Intent.SetEmail
+        intent: LoginState.Default.Intent.SetUsername
     ) {
-        setState(state.copy(email = intent.value))
+        setState(state.copy(username = intent.value))
     }
 
     private fun handleSetPasswordIntent(
@@ -66,7 +65,7 @@ class LoginViewModel(
         viewModelScope.launch {
             loginUseCase(
                 LoginUseCase.Params(
-                    email = state.email,
+                    username = state.username,
                     password = state.password
                 )
             ).collectOutcome(

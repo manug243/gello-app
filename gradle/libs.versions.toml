@@ -23,6 +23,7 @@ kotlinxSerializationJson = "1.9.0"
 kotlinxCoroutinesCore = "1.10.2"
 sqlite = "2.6.2"
 androidx-room = "2.8.4"
+buildKonfig = "0.17.1"
 
 [libraries]
 
@@ -76,3 +77,4 @@ androidLint = { id = "com.android.lint", version.ref = "agp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "androidx-room" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }

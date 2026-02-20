@@ -1,4 +1,4 @@
-package de.gello.app.feature.login.ui
+package de.gello.app.feature.auth.login.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import de.gello.app.feature.login.LoginState
+import de.gello.app.feature.auth.login.LoginState
 import de.gello.designsystem.component.Page
 import de.gello.designsystem.component.PasswordTextFieldWithForgotPassword
 import de.gello.designsystem.component.PrimaryButton
@@ -26,15 +26,15 @@ import de.gello.designsystem.theme.Spacing
 import gello.composeapp.generated.resources.Res
 import gello.composeapp.generated.resources.appicon
 import gello.composeapp.generated.resources.button_login
-import gello.composeapp.generated.resources.placeholder_email
 import gello.composeapp.generated.resources.placeholder_password
+import gello.composeapp.generated.resources.placeholder_username
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun LoginPage(
     state: LoginState.Default,
-    onEmailChange: (String) -> Unit,
+    onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
     onClickForgetPassword: () -> Unit,
@@ -49,7 +49,7 @@ internal fun LoginPage(
 
         LoginForm(
             state = state,
-            onEmailChange = onEmailChange,
+            onUsernameChange = onUsernameChange,
             onPasswordChange = onPasswordChange,
             onClickForgetPassword = onClickForgetPassword
         )
@@ -90,7 +90,7 @@ private fun Header() {
 @Composable
 private fun LoginForm(
     state: LoginState.Default,
-    onEmailChange: (String) -> Unit,
+    onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onClickForgetPassword: () -> Unit
 ) {
@@ -98,9 +98,9 @@ private fun LoginForm(
         verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
     ) {
         TextField(
-            value = state.email,
-            placeholder = stringResource(Res.string.placeholder_email),
-            onValueChanged = onEmailChange
+            value = state.username,
+            placeholder = stringResource(Res.string.placeholder_username),
+            onValueChanged = onUsernameChange
         )
 
         PasswordTextFieldWithForgotPassword(

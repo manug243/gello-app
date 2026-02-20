@@ -15,7 +15,7 @@ import com.skash.forge.network.session.TokenAuthenticator
 import de.gello.app.AppViewModel
 import de.gello.app.event.UIEvent
 import de.gello.app.feature.example.ExampleViewModel
-import de.gello.app.feature.login.LoginViewModel
+import de.gello.app.feature.auth.login.LoginViewModel
 import de.gello.app.feature.overview.OverviewViewModel
 import de.gello.data.session.SessionManager
 import de.gello.data.session.TokenAuthenticatorImpl
