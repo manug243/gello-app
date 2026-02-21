@@ -25,6 +25,7 @@ import de.gello.domain.usecase.LoginUseCase
 import de.gello.domain.usecase.LogoutUseCase
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import de.gello.domain.usecase.RegisterUserUseCase
+import de.gello.domain.usecase.journal.FetchJournalsUseCase
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -67,4 +68,5 @@ val appModule = module {
     factory { LoginUseCase(get(), get()) }
     factory { LogoutUseCase(get(), get()) }
     factory { RegisterUserUseCase(get()) }
+    factory { FetchJournalsUseCase(get()) }
 }

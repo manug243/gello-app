@@ -24,6 +24,7 @@ kotlinxCoroutinesCore = "1.10.2"
 sqlite = "2.6.2"
 androidx-room = "2.8.4"
 buildKonfig = "0.17.1"
+kotlinxDatetime = "0.7.1"
 
 [libraries]
 
@@ -53,6 +54,7 @@ material-icons-extended = { module = "org.jetbrains.compose.material:material-ic
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
 forge-network-core-client = { module = "com.skash.forge:network-api-client", version.ref = "forge" }
 forge-network-core-response = { module = "com.skash.forge:network-api-response", version.ref = "forge" }

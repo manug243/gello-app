@@ -8,7 +8,7 @@ sealed interface OverviewState {
     data object Loading : OverviewState
 
     data class Default(
-        val journals: List<Journal> = Journal.mocks, // need to change back to emptyList() when done testing
+        val journals: List<Journal> = emptyList(),
         val showError: Boolean = false
     ) : OverviewState {
         sealed interface Intent : OverviewState.Intent {
