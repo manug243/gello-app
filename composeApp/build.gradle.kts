@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -17,6 +18,8 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_21)
         }
     }
+
+    jvm()
     
     listOf(
         iosX64(),
@@ -62,6 +65,11 @@ kotlin {
             implementation(libs.forge.viewmodel)
             implementation(libs.forge.event)
         }
+
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+        }
     }
 }
 
@@ -89,6 +97,18 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "de.gello.app.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "de.gello.app"
+            packageVersion = "1.0.0"
+        }
     }
 }
 

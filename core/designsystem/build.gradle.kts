@@ -14,6 +14,8 @@ kotlin {
         minSdk = 24
     }
 
+    jvm()
+
     val xcfName = "dataKit"
 
     iosX64 {

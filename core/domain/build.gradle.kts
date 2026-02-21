@@ -21,6 +21,8 @@ kotlin {
         }
     }
 
+    jvm()
+
     val xcfName = "domainKit"
 
     iosX64 {
