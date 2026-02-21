@@ -28,6 +28,8 @@ kotlin {
         }
     }
 
+    jvm()
+
     val xcfName = "dataKit"
 
     iosX64 {
@@ -119,6 +121,7 @@ dependencies {
     add("kspIosSimulatorArm64", libs.androidx.room.compiler)
     add("kspIosX64", libs.androidx.room.compiler)
     add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
 }
 
 project.tasks.withType(KotlinCompilationTask::class.java).configureEach {

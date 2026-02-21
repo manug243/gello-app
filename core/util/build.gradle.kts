@@ -21,6 +21,8 @@ kotlin {
         }
     }
 
+    jvm()
+
     val xcfName = "utilKit"
 
     iosX64 {
