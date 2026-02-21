@@ -1,1 +1,1 @@
-/Users/manuelgilles/.konan/kotlin-native-prebuilt-macos-aarch64-2.2.21/klib/commonized/2.2.21
+C:\Users\manue\.konan\kotlin-native-prebuilt-windows-x86_64-2.2.21\klib\commonized\2.2.21
