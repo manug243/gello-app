@@ -64,6 +64,7 @@ kotlin {
                 implementation(libs.androidx.room.runtime)
                 implementation(libs.sqlite.bundled)
                 implementation(libs.material3)
+                api(libs.kotlinx.datetime)
 
                 implementation(libs.forge.network.core.session)
                 implementation(libs.forge.network.core.client)

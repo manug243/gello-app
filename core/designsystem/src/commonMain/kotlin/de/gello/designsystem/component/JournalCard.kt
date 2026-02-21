@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import de.gello.designsystem.theme.Spacing
+import de.gello.util.helper.DateHelper
 import de.gello.util.helper.parseHexColor
 
 @Composable
@@ -122,7 +123,7 @@ fun JournalCard(
                 Spacer(Modifier.width(Spacing.ExtraSmall))
 
                 Text(
-                    text = updatedAt,
+                    text = DateHelper.formatDateString(updatedAt),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
