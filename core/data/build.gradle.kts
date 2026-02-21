@@ -106,7 +106,7 @@ buildkonfig {
 }
 
 room {
-    schemaDirectory("$project/schemas")
+    schemaDirectory("$projectDir/schemas")
 }
 
 
