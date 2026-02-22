@@ -14,6 +14,6 @@ internal object Api {
     }
 
     object Project : Route(BASE_URL, "project") {
-
+        object Create : Route(this, "create")
     }
 }

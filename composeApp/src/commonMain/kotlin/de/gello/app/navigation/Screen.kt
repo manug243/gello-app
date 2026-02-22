@@ -11,5 +11,5 @@ sealed interface Screen {
     data object Example : Screen
 
     @Serializable
-    data object Overview : Screen
+    data object JournalCreation : Screen
 }

@@ -6,4 +6,6 @@ import de.gello.domain.model.Journal
 interface JournalRepository {
 
     suspend fun fetchJournals(): ApiResponse<List<Journal>>
+
+    suspend fun createJournal(journal: Journal): ApiResponse<Unit>
 }

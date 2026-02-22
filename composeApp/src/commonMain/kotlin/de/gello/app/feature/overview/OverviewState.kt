@@ -11,8 +11,6 @@ sealed interface OverviewState {
         val journals: List<Journal> = emptyList(),
         val showError: Boolean = false
     ) : OverviewState {
-        sealed interface Intent : OverviewState.Intent {
-            // TODO adding needed intents
-        }
+        sealed interface Intent : OverviewState.Intent
     }
 }

@@ -1,7 +1,9 @@
 package de.gello.app
 
 import androidx.lifecycle.viewModelScope
+import com.skash.forge.navigation.NavigationEvent
 import de.gello.app.event.UIEvent
+import de.gello.app.navigation.Screen
 import de.gello.app.util.BaseViewModel
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,7 +27,7 @@ class AppViewModel(
     override fun executeIntent(intent: AppState.Intent) {
         when (intent) {
             AppState.Intent.NavigateToCreateJournal ->
-                sendUIEvent(UIEvent.Snackbar("Cannot create journal - not implemented yet"))
+               dispatchNavigationEvent(NavigationEvent.NavigateTo(Screen.JournalCreation))
         }
     }
 }
