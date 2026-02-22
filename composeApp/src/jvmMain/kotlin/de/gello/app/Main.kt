@@ -4,6 +4,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import gello.composeapp.generated.resources.Res
+import gello.composeapp.generated.resources.appicon
+import org.jetbrains.compose.resources.painterResource
 import java.awt.Toolkit
 
 fun main() = application {
@@ -20,7 +23,8 @@ fun main() = application {
         state = rememberWindowState(
             width = width.dp,
             height = height.dp
-        )
+        ),
+        icon = painterResource(Res.drawable.appicon)
     ) {
         GelloApp()
     }
