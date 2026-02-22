@@ -5,6 +5,7 @@ import com.skash.forge.network.client.execute
 import com.skash.forge.network.response.ApiResponse
 import de.gello.data.mapper.toJournal
 import de.gello.data.network.endpoint.Api
+import de.gello.data.network.request.JournalRequest
 import de.gello.data.network.response.JournalResponse
 import de.gello.domain.model.Journal
 import de.gello.domain.repository.JournalRepository
@@ -22,4 +23,15 @@ class JournalRepositoryImpl(
                 get(Api.Project)
             }
         )
+
+    override suspend fun createJournal(journal: Journal): ApiResponse<Unit> =
+        httpClient.execute<Unit, Unit>(
+            mapper = {},
+            requestBuilder = {
+                post(Api.Project.Create)
+                body(JournalRequest(name = journal.title))
+            }
+        )
+
+
 }

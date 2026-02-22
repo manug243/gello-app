@@ -52,5 +52,14 @@ data class Journal(
             Journal(16, "UX Feedback", "#FFF59D", "Miriam Beck", "17/02/26"),
             Journal(17, "Bug Reports", "#EF9A9A", "Jan Peters", "18/02/26")
         )
+
+        val emptyJournal = Journal(
+            id = -1,
+            title = "",
+            color = "",
+            owner = "",
+            updatedAt = "",
+            entries = emptyList()
+        )
     }
 }

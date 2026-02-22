@@ -18,6 +18,8 @@ sealed class ErrorType(
     data object RegistrationFailed : ErrorType("Registration failed")
 
     data object FetchJournalsFailed : ErrorType("Fetch failed")
+
+    data object CreateJournalFailed : ErrorType("Creation of journal failed")
 }
 
 inline fun ApiResponse.Error.toErrorType(defaultErrorType: ApiResponse.Error.Unspecified.() -> ErrorType): ErrorType =
