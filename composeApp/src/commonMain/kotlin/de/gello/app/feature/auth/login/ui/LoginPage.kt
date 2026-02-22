@@ -101,7 +101,8 @@ private fun LoginForm(
         TextField(
             value = state.username,
             placeholder = stringResource(Res.string.placeholder_username),
-            onValueChanged = onUsernameChange
+            onValueChanged = onUsernameChange,
+            isError = state.showError
         )
 
         PasswordTextFieldWithForgotPassword(
@@ -109,7 +110,8 @@ private fun LoginForm(
             placeholder = stringResource(Res.string.placeholder_password),
             onPasswordChange = onPasswordChange,
             imeAction = ImeAction.Done,
-            onForgotPasswordClick = onClickForgetPassword
+            onForgotPasswordClick = onClickForgetPassword,
+            isError = state.showError
         )
     }
 }
