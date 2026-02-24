@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import de.gello.designsystem.component.Page
 import de.gello.designsystem.theme.Spacing
 import gello.composeapp.generated.resources.Res
+import gello.composeapp.generated.resources.registration_continue_hint
 import gello.composeapp.generated.resources.registration_success_subtitle
 import gello.composeapp.generated.resources.registration_success_title
 import org.jetbrains.compose.resources.stringResource
@@ -55,6 +56,14 @@ internal fun RegistrationCompletePage(
         Text(
             text = stringResource(Res.string.registration_success_subtitle),
             style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(Spacing.Small))
+
+        Text(
+            text = stringResource(Res.string.registration_continue_hint),
+            style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center
         )
     }
