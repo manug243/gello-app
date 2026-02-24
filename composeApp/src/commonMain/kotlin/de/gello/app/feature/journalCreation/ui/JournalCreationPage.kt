@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import de.gello.app.feature.journalCreation.JournalCreationState.Default
 import de.gello.designsystem.component.ColorPickerDialog
 import de.gello.designsystem.component.JournalCard
@@ -64,9 +65,7 @@ internal fun JournalCreationPage(
     }
 
     Page(
-        modifier = Modifier
-            .padding(horizontal = Spacing.Medium)
-            .verticalScroll(rememberScrollState())
+        modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
@@ -86,7 +85,9 @@ internal fun JournalCreationPage(
                     Text(
                         text = stringResource(Res.string.preview)
                     )
+
                     Spacer(Modifier.height(Spacing.Small))
+
                     JournalCard(
                         colorIndicator = state.journal.color,
                         title = state.journal.title,
@@ -122,14 +123,16 @@ private fun InputFields(
             value = state.journal.title,
             placeholder = stringResource(Res.string.placeholder_title),
             onValueChanged = onTitleChanged,
-            isError = state.showError
+            isError = state.showError,
+            imeAction = ImeAction.Next
         )
 
         TextField(
             value = state.journal.description.orEmpty(),
             placeholder = stringResource(Res.string.placeholder_description),
             onValueChanged = onDescChanged,
-            isError = state.showError
+            isError = state.showError,
+            imeAction = ImeAction.Done
         )
     }
 }
