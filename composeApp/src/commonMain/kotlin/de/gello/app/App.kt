@@ -1,6 +1,10 @@
 package de.gello.app
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import de.gello.app.di.appModule
 import de.gello.app.navigation.AppNavigation
 import de.gello.data.di.dataModule
@@ -20,12 +24,17 @@ fun GelloApp() {
         }
     ) {
         AppTheme {
-            val appViewModel = koinViewModel<AppViewModel>()
-            val state by appViewModel.collectStateFlow().collectAsState()
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                val appViewModel = koinViewModel<AppViewModel>()
+                val state by appViewModel.collectStateFlow().collectAsState()
 
-            AppContent(
-                state = state
-            )
+                AppContent(
+                    state = state
+                )
+            }
         }
     }
 }
