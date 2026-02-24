@@ -24,6 +24,16 @@ class JournalCreationViewModel(
                     copy(title = intent.value)
                 }
 
+            is JournalCreationState.Default.Intent.SetJournalDescriptionIntent ->
+                copyJournal {
+                    copy(description = intent.value)
+                }
+
+            is JournalCreationState.Default.Intent.SetJournalColorIntent ->
+                copyJournal {
+                    copy(color = intent.value)
+                }
+
             is JournalCreationState.Default.Intent.CreateJournalIntent -> handleIntent<_, _>(
                 intent = intent,
                 handler = ::handleCreateJournalIntent
@@ -35,7 +45,7 @@ class JournalCreationViewModel(
         crossinline block: Journal.() -> Journal
     ) {
         reduceState<JournalCreationState.Default> {
-            copy(journal = block(journal))
+            copy(journal = block(journal), showError = false)
         }
     }
 
@@ -55,7 +65,6 @@ class JournalCreationViewModel(
                     setState(state.copy(showError = true))
                 },
                 onSuccess = {
-
                     executeIntent(JournalCreationState.Intent.NavigateUp)
                 }
             )

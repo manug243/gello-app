@@ -1,17 +1,15 @@
 package de.gello.util.helper
 
-fun parseHexColor(hex: String): Long? {
-    val cleaned = hex
-        .trim()
-        .removePrefix("#")
+import androidx.compose.ui.graphics.Color
 
-    if (cleaned.length != 6 && cleaned.length != 8) return null
+fun parseHexColor(hex: String): Color {
+    val cleaned = hex.trim().removePrefix("#")
 
-    val value = cleaned.toLongOrNull(16) ?: return null
+    val value = cleaned.toLongOrNull(16) ?: return Color.Blue
 
-    return if (cleaned.length == 6) {
-        0xFF000000 or value
-    } else {
-        value
+    return when (cleaned.length) {
+        6 -> Color(0xFF000000 or value)
+        8 -> Color(value)
+        else -> Color.Blue
     }
 }

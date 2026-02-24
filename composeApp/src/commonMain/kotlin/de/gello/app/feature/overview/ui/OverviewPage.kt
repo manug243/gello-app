@@ -15,6 +15,7 @@ import de.gello.app.feature.overview.OverviewState
 import de.gello.designsystem.component.JournalCard
 import de.gello.designsystem.component.PageWithPaddingSlot
 import de.gello.designsystem.theme.Spacing
+import de.gello.util.helper.DateHelper
 
 @Composable
 internal fun OverviewPage(
@@ -33,7 +34,7 @@ internal fun OverviewPage(
                     colorIndicator = journal.color,
                     title = journal.title,
                     owner = journal.owner,
-                    updatedAt = journal.updatedAt,
+                    updatedAt = DateHelper.formatDateString(journal.updatedAt),
                     entryCount = journal.entries?.count() ?: 0,
                     onClick = {}
                 )

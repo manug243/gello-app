@@ -3,14 +3,24 @@
 <resources>
     <string name="placeholder_username">Username</string>
     <string name="placeholder_password">Password</string>
+    <string name="placeholder_title">Title</string>
+    <string name="placeholder_description">Description (optional)</string>
+
+    <string name="screen_title_create_journal">Create a new journal</string>
+
+    <string name="preview">Preview</string>
 
     <string name="button_login">Login</string>
     <string name="button_registration">Need to register?</string>
     <string name="button_register">Register</string>
+    <string name="button_create_journal">Create journal</string>
+    <string name="button_select">Select</string>
 
     <string name="registration_header_title">Join Gello and Track Your Experiments</string>
     <string name="registration_header_subtitle">Your Lab Journal in one app – organize projects, track experiments, and analyze gels effortlessly!</string>
     <string name="registration_success_title">You're All Set</string>
     <string name="registration_success_subtitle">Your registration was successful. Dive into your lab projects and get started.</string>
     <string name="registration_continue_hint">(tab to continue)</string>
+
+    <string name="create_journal_select_color">Select your journal color indicator:</string>
 </resources>

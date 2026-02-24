@@ -5,11 +5,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import de.gello.app.event.UIEvent
 import de.gello.app.event.UIEventHandler
+import de.gello.app.feature.journalCreation.JournalCreationState.Default
+import de.gello.app.feature.journalCreation.JournalCreationState.Default.Intent
 import de.gello.app.feature.journalCreation.ui.JournalCreationPage
 import de.gello.designsystem.component.CoveringProgressIndicator
 import de.gello.designsystem.component.ScreenScaffold
 import de.gello.designsystem.component.TopAppBarWithBackNavigation
+import gello.composeapp.generated.resources.Res
+import gello.composeapp.generated.resources.screen_title_create_journal
 import kotlinx.coroutines.flow.Flow
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun JournalCreationScreen(viewmodel: JournalCreationViewModel) {
@@ -33,7 +38,7 @@ fun JournalCreationScreenImpl(
     ) { snackBarHost ->
         when (state) {
             is JournalCreationState.Loading -> CoveringProgressIndicator()
-            is JournalCreationState.Default -> DefaultsPage(
+            is Default -> DefaultsPage(
                 snackBarHost = snackBarHost,
                 onNavigateBack = { executeIntent(JournalCreationState.Intent.NavigateUp) },
                 state = state,
@@ -48,7 +53,7 @@ fun JournalCreationScreenImpl(
 private fun DefaultsPage(
     snackBarHost: @Composable () -> Unit = {},
     onNavigateBack: () -> Unit,
-    state: JournalCreationState.Default,
+    state: Default,
     executeIntent: (JournalCreationState.Intent) -> Unit
 ) {
 
@@ -56,7 +61,7 @@ private fun DefaultsPage(
         snackbarHost = snackBarHost,
         topBar = {
             TopAppBarWithBackNavigation(
-                title = "Create a new journal",
+                title = stringResource(Res.string.screen_title_create_journal),
                 onNavigateBack = onNavigateBack
             )
         }
@@ -64,12 +69,16 @@ private fun DefaultsPage(
         JournalCreationPage(
             state = state,
             onTitleChanged = {
-                executeIntent(
-                    JournalCreationState.Default.Intent.SetJournalTitleIntent(it)
-                )
+                executeIntent(Intent.SetJournalTitleIntent(it))
+            },
+            onDescChanged = {
+                executeIntent(Intent.SetJournalDescriptionIntent(it))
+            },
+            onColorChanged = {
+                executeIntent(Intent.SetJournalColorIntent(it))
             },
             onCreateClick = {
-                executeIntent(JournalCreationState.Default.Intent.CreateJournalIntent)
+                executeIntent(Intent.CreateJournalIntent)
             }
         )
     }
