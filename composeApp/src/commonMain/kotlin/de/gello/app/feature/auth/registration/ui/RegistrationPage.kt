@@ -51,7 +51,8 @@ internal fun RegistrationPage(
             value = state.username,
             placeholder = stringResource(Res.string.placeholder_username),
             onValueChanged = onUsernameChange,
-            contentType = ContentType.NewUsername
+            contentType = ContentType.NewUsername,
+            isError = state.showError
         )
 
         PasswordTextField(
@@ -59,7 +60,8 @@ internal fun RegistrationPage(
             placeholder = stringResource(Res.string.placeholder_password),
             onPasswordChange = onPasswordChange,
             contentType = ContentType.NewPassword,
-            imeAction = ImeAction.Done
+            imeAction = ImeAction.Done,
+            isError = state.showError
         )
 
         Spacer(modifier = Modifier.height(Spacing.Medium))

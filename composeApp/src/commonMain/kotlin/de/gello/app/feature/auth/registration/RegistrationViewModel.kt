@@ -23,11 +23,11 @@ class RegistrationViewModel(
             )
 
             is RegistrationState.Default.Intent.SetUsername -> reduceState<RegistrationState.Default> {
-                copy(username = intent.value)
+                copy(username = intent.value, showError = false)
             }
 
             is RegistrationState.Default.Intent.SetPassword -> reduceState<RegistrationState.Default> {
-                copy(password = intent.value)
+                copy(password = intent.value, showError = false)
             }
         }
 
@@ -44,7 +44,7 @@ class RegistrationViewModel(
             ).collectOutcome(
                 onProgress = { setState(RegistrationState.Loading) },
                 onFailure = {
-                    setState(state.copy())
+                    setState(state.copy(showError = true))
                     showSnackbar(it.message)
                 },
                 onSuccess = { setState(RegistrationState.Complete) }
