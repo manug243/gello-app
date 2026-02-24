@@ -48,6 +48,7 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.materialIconsExtended)
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.compose.colorpicker)
             }
         }
     }

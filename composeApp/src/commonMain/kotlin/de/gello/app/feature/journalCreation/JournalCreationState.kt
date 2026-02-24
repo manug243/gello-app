@@ -16,6 +16,14 @@ sealed interface JournalCreationState {
         sealed interface Intent : JournalCreationState.Intent {
             data object CreateJournalIntent : Intent
             data class SetJournalTitleIntent(val value: String) : Intent
+            data class SetJournalDescriptionIntent(val value: String) : Intent
+            data class SetJournalColorIntent(val value: String) : Intent
         }
+
+
+        val allFieldsFilled: Boolean
+            get() {
+                return arrayOf(journal.title, journal.color).all { it.isNotBlank() }
+            }
     }
 }

@@ -42,8 +42,6 @@ fun JournalCard(
     onClick: () -> Unit
 ) {
     val color = parseHexColor(colorIndicator)
-        ?.let { Color(it) }
-        ?: Color.Blue
 
     ElevatedCard(
         modifier = Modifier
@@ -123,7 +121,7 @@ fun JournalCard(
                 Spacer(Modifier.width(Spacing.ExtraSmall))
 
                 Text(
-                    text = DateHelper.formatDateString(updatedAt),
+                    text = updatedAt,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

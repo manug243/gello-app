@@ -25,6 +25,7 @@ sqlite = "2.6.2"
 androidx-room = "2.8.4"
 buildKonfig = "0.17.1"
 kotlinxDatetime = "0.7.1"
+colorPickerCompose = "1.1.3"
 
 [libraries]
 
@@ -56,6 +57,7 @@ sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sql
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-coroutines-swing= { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesCore" }
+compose-colorpicker = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorPickerCompose" }
 
 forge-network-core-client = { module = "com.skash.forge:network-api-client", version.ref = "forge" }
 forge-network-core-response = { module = "com.skash.forge:network-api-response", version.ref = "forge" }

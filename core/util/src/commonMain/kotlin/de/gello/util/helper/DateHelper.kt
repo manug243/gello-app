@@ -1,8 +1,13 @@
 package de.gello.util.helper
 
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
 import kotlinx.datetime.format.char
+import kotlinx.datetime.number
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 object DateHelper {
 
@@ -43,9 +48,24 @@ object DateHelper {
             val month = parts[1].padStart(2, '0')
             val day = parts[2].padStart(2, '0')
 
-            "$day.$month.$year ${correctedHour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}"
+            "$day.$month.$year ${correctedHour.toString().padStart(2, '0')}:${
+                minute.toString().padStart(2, '0')
+            }"
         } catch (e: Exception) {
             "-"
         }
+    }
+
+    @OptIn(ExperimentalTime::class)
+    fun formattedTimeStamp(): String {
+        val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+
+        val day = now.day.toString().padStart(2, '0')
+        val month = now.month.number.toString().padStart(2, '0')
+        val year = now.year.toString()
+        val hour = now.hour.toString().padStart(2, '0')
+        val minute = now.minute.toString().padStart(2, '0')
+
+        return "$day.$month.$year $hour:$minute"
     }
 }
