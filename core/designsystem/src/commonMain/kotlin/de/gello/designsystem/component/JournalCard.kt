@@ -11,11 +11,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountBox
-import androidx.compose.material.icons.outlined.DataObject
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.FilePresent
-import androidx.compose.material.icons.outlined.Inbox
+import androidx.compose.material.icons.outlined.LibraryBooks
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -26,10 +23,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import de.gello.designsystem.theme.Spacing
-import de.gello.util.helper.DateHelper
 import de.gello.util.helper.parseHexColor
 
 @Composable
@@ -67,7 +62,7 @@ fun JournalCard(
 
             Icon(
                 modifier = Modifier.size(18.dp),
-                imageVector = Icons.Outlined.Inbox,
+                imageVector = Icons.Outlined.LibraryBooks,
                 contentDescription = null
             )
 

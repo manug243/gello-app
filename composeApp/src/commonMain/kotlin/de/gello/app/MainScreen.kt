@@ -2,7 +2,10 @@ package de.gello.app
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.LibraryBooks
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.automirrored.filled.Note
+import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Doorbell
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -49,7 +52,7 @@ fun MainScreen(viewmodel: AppViewModel) {
     }
 
     val tabs = listOf(
-        BottomNavItem("Overview", TopLevelScreen.Overview, Icons.AutoMirrored.Default.Note),
+        BottomNavItem("Overview", TopLevelScreen.Overview, Icons.Default.Book),
         BottomNavItem("Example", TopLevelScreen.Example, Icons.Default.Doorbell)
     )
 
