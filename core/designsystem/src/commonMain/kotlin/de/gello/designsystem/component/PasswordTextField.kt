@@ -59,8 +59,8 @@ fun PasswordTextField(
                     )
                 }
             },
-            supportingText = {
-                supportingText?.let { Text(text = it) }
+            supportingText = supportingText?.let { text ->
+                { Text(text = text) }
             },
             keyboardOptions =
                 KeyboardOptions.Default.copy(
