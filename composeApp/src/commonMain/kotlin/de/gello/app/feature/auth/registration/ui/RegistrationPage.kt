@@ -137,8 +137,8 @@ private fun RegisterForm(
             onPasswordChange = onPasswordChange,
             contentType = ContentType.NewPassword,
             imeAction = ImeAction.Next,
-            isError = state.showError || state.identicalPasswords,
-            supportingText = if (state.identicalPasswords) "Passwords are not identical." else null
+            isError = state.showError || state.passwordsMismatch,
+            supportingText = if (state.passwordsMismatch) "Passwords are not identical." else null
         )
 
         PasswordTextField(
@@ -147,8 +147,8 @@ private fun RegisterForm(
             onPasswordChange = onRepeatPasswordChange,
             contentType = ContentType.NewPassword,
             imeAction = ImeAction.Done,
-            isError = state.showError || state.identicalPasswords,
-            supportingText = if (state.identicalPasswords) "Passwords are not identical." else null
+            isError = state.showError || state.passwordsMismatch,
+            supportingText = if (state.passwordsMismatch) "Passwords are not identical." else null
         )
     }
 }

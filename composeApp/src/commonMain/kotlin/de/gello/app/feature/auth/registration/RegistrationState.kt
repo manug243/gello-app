@@ -26,7 +26,7 @@ sealed interface RegistrationState {
             data object RegisterButton : Intent
         }
 
-        val identicalPasswords: Boolean
+        val passwordsMismatch: Boolean
             get() {
                 return password.isNotBlank() &&
                         repeatedPassword.isNotBlank() &&
@@ -38,7 +38,7 @@ sealed interface RegistrationState {
                 val allFilled = arrayOf(firstname, surname, username, password, repeatedPassword)
                     .all { it.isNotBlank() }
 
-                return allFilled && !identicalPasswords
+                return allFilled && !passwordsMismatch
             }
     }
 }
