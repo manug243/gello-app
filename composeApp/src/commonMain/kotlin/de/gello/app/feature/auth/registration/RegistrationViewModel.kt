@@ -22,12 +22,24 @@ class RegistrationViewModel(
                 handler = ::handleRegistrationIntent
             )
 
+            is RegistrationState.Default.Intent.SetFirstname -> reduceState<RegistrationState.Default> {
+                copy(firstname = intent.value, showError = false)
+            }
+
+            is RegistrationState.Default.Intent.SetSurname -> reduceState<RegistrationState.Default> {
+                copy(surname = intent.value, showError = false)
+            }
+
             is RegistrationState.Default.Intent.SetUsername -> reduceState<RegistrationState.Default> {
                 copy(username = intent.value, showError = false)
             }
 
             is RegistrationState.Default.Intent.SetPassword -> reduceState<RegistrationState.Default> {
                 copy(password = intent.value, showError = false)
+            }
+
+            is RegistrationState.Default.Intent.SetRepeatPassword -> reduceState<RegistrationState.Default> {
+                copy(repeatedPassword = intent.value, showError = false)
             }
         }
 

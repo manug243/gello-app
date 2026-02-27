@@ -69,11 +69,20 @@ private fun DefaultsPage(
     ) {
         RegistrationPage(
             state = state,
+            onFirstnameChange = {
+                executeIntent(Default.Intent.SetFirstname(it))
+            },
+            onSurnameChange = {
+                executeIntent(Default.Intent.SetSurname(it))
+            },
             onUsernameChange = {
                 executeIntent(Default.Intent.SetUsername(it))
             },
             onPasswordChange = {
                 executeIntent(Default.Intent.SetPassword(it))
+            },
+            onRepeatPasswordChange = {
+                executeIntent(Default.Intent.SetRepeatPassword(it))
             },
             onClickRegister = {
                 executeIntent(Default.Intent.RegisterButton)
