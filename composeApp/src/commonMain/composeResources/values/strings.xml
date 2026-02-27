@@ -3,6 +3,9 @@
 <resources>
     <string name="placeholder_username">Username</string>
     <string name="placeholder_password">Password</string>
+    <string name="placeholder_repeat_password">Repeat password</string>
+    <string name="placeholder_firstname">Firstname</string>
+    <string name="placeholder_surname">Surname</string>
     <string name="placeholder_title">Title</string>
     <string name="placeholder_description">Description (optional)</string>
 

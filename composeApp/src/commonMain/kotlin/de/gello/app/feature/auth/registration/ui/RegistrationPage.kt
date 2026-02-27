@@ -25,7 +25,10 @@ import de.gello.designsystem.component.TextField
 import de.gello.designsystem.theme.Spacing
 import gello.composeapp.generated.resources.Res
 import gello.composeapp.generated.resources.button_register
+import gello.composeapp.generated.resources.placeholder_firstname
 import gello.composeapp.generated.resources.placeholder_password
+import gello.composeapp.generated.resources.placeholder_repeat_password
+import gello.composeapp.generated.resources.placeholder_surname
 import gello.composeapp.generated.resources.placeholder_username
 import gello.composeapp.generated.resources.registration_header_subtitle
 import gello.composeapp.generated.resources.registration_header_title
@@ -34,8 +37,11 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun RegistrationPage(
     state: RegistrationState.Default,
+    onFirstnameChange: (String) -> Unit,
+    onSurnameChange: (String) -> Unit,
     onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
+    onRepeatPasswordChange: (String) -> Unit,
     onClickRegister: () -> Unit
 ) {
 
@@ -45,26 +51,16 @@ internal fun RegistrationPage(
     ) {
         Header()
 
-        Spacer(modifier = Modifier.height(Spacing.Medium))
-
-        TextField(
-            value = state.username,
-            placeholder = stringResource(Res.string.placeholder_username),
-            onValueChanged = onUsernameChange,
-            contentType = ContentType.NewUsername,
-            isError = state.showError
-        )
-
-        PasswordTextField(
-            value = state.password,
-            placeholder = stringResource(Res.string.placeholder_password),
+        RegisterForm(
+            state = state,
+            onFirstnameChange = onFirstnameChange,
+            onSurnameChange = onSurnameChange,
+            onUsernameChange = onUsernameChange,
             onPasswordChange = onPasswordChange,
-            contentType = ContentType.NewPassword,
-            imeAction = ImeAction.Done,
-            isError = state.showError
+            onRepeatPasswordChange = onRepeatPasswordChange,
         )
 
-        Spacer(modifier = Modifier.height(Spacing.Medium))
+        Spacer(modifier = Modifier.weight(1f))
 
         PrimaryButton(
             title = stringResource(Res.string.button_register),
@@ -92,6 +88,67 @@ private fun Header() {
             text = stringResource(Res.string.registration_header_subtitle),
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+private fun RegisterForm(
+    state: RegistrationState.Default,
+    onFirstnameChange: (String) -> Unit,
+    onSurnameChange: (String) -> Unit,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onRepeatPasswordChange: (String) -> Unit
+    ) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
+    ) {
+        TextField(
+            value = state.firstname,
+            placeholder = stringResource(Res.string.placeholder_firstname),
+            onValueChanged = onFirstnameChange,
+            contentType = ContentType.PersonFirstName,
+            isError = state.showError,
+            imeAction = ImeAction.Next
+        )
+
+        TextField(
+            value = state.surname,
+            placeholder = stringResource(Res.string.placeholder_surname),
+            onValueChanged = onSurnameChange,
+            contentType = ContentType.PersonLastName,
+            isError = state.showError,
+            imeAction = ImeAction.Next
+        )
+
+        TextField(
+            value = state.username,
+            placeholder = stringResource(Res.string.placeholder_username),
+            onValueChanged = onUsernameChange,
+            contentType = ContentType.NewUsername,
+            isError = state.showError,
+            imeAction = ImeAction.Next
+        )
+
+        PasswordTextField(
+            value = state.password,
+            placeholder = stringResource(Res.string.placeholder_password),
+            onPasswordChange = onPasswordChange,
+            contentType = ContentType.NewPassword,
+            imeAction = ImeAction.Next,
+            isError = state.showError || state.identicalPasswords,
+            supportingText = if (state.identicalPasswords) "Passwords are not identical." else null
+        )
+
+        PasswordTextField(
+            value = state.repeatedPassword,
+            placeholder = stringResource(Res.string.placeholder_repeat_password),
+            onPasswordChange = onRepeatPasswordChange,
+            contentType = ContentType.NewPassword,
+            imeAction = ImeAction.Done,
+            isError = state.showError || state.identicalPasswords,
+            supportingText = if (state.identicalPasswords) "Passwords are not identical." else null
         )
     }
 }
