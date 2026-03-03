@@ -2,11 +2,8 @@ package de.gello.app
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.LibraryBooks
-import androidx.compose.material.icons.automirrored.filled.MenuBook
-import androidx.compose.material.icons.automirrored.filled.Note
 import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.Doorbell
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -29,6 +26,10 @@ import de.gello.app.navigation.topLevelGraph
 import de.gello.designsystem.component.BottomNavigationBar
 import de.gello.designsystem.component.FAB
 import de.gello.designsystem.component.ScreenScaffold
+import gello.composeapp.generated.resources.Res
+import gello.composeapp.generated.resources.tab_overview
+import gello.composeapp.generated.resources.tab_settings
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,8 +53,14 @@ fun MainScreen(viewmodel: AppViewModel) {
     }
 
     val tabs = listOf(
-        BottomNavItem("Overview", TopLevelScreen.Overview, Icons.Default.Book),
-        BottomNavItem("Example", TopLevelScreen.Example, Icons.Default.Doorbell)
+        BottomNavItem(
+            title = stringResource(Res.string.tab_overview),
+            route = TopLevelScreen.Overview, Icons.Default.Book
+        ),
+        BottomNavItem(
+            title = stringResource(Res.string.tab_settings),
+            route = TopLevelScreen.Settings, Icons.Default.Settings
+        )
     )
 
     val selectedTab = tabs.findSelectedTabForDestination(currentDestination)
