@@ -8,7 +8,7 @@ sealed interface Screen {
     data object Graph : Screen
 
     @Serializable
-    data object Example : Screen
+    data object Settings : Screen
 
     @Serializable
     data object JournalCreation : Screen

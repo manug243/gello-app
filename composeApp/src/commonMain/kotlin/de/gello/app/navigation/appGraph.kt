@@ -10,7 +10,7 @@ import org.koin.compose.koinInject
 
 fun NavGraphBuilder.appGraph() {
 
-    composableWithTransition<Screen.Example> {
+    composableWithTransition<Screen.Settings> {
         val viewModel = koinInject<SettingsViewModel>()
         SettingsScreen(viewmodel = viewModel)
     }
