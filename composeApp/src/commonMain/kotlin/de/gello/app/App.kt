@@ -24,10 +24,7 @@ fun GelloApp() {
         }
     ) {
         AppTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
+            Surface {
                 val appViewModel = koinViewModel<AppViewModel>()
                 val state by appViewModel.collectStateFlow().collectAsState()
 

@@ -15,7 +15,7 @@ import com.skash.forge.network.session.SessionExpirationHandler
 import com.skash.forge.network.session.TokenAuthenticator
 import de.gello.app.AppViewModel
 import de.gello.app.event.UIEvent
-import de.gello.app.feature.example.ExampleViewModel
+import de.gello.app.feature.settings.SettingsViewModel
 import de.gello.app.feature.auth.login.LoginViewModel
 import de.gello.app.feature.auth.registration.RegistrationViewModel
 import de.gello.app.feature.journalCreation.JournalCreationViewModel
@@ -38,7 +38,7 @@ val appModule = module {
     viewModelOf(::AppViewModel)
     viewModelOf(::LoginViewModel)
     viewModelOf(::RegistrationViewModel)
-    viewModelOf(::ExampleViewModel)
+    viewModelOf(::SettingsViewModel)
     viewModelOf(::OverviewViewModel)
     viewModelOf(::JournalCreationViewModel)
 

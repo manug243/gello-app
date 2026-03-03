@@ -8,7 +8,7 @@ sealed interface TopLevelScreen : Screen {
     data object Graph : TopLevelScreen
 
     @Serializable
-    data object Example : TopLevelScreen
+    data object Settings : TopLevelScreen
 
     @Serializable
     data object Overview : TopLevelScreen
