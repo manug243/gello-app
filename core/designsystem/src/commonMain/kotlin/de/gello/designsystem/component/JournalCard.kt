@@ -11,8 +11,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.LibraryBooks
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.LibraryBooks
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -62,7 +62,7 @@ fun JournalCard(
 
             Icon(
                 modifier = Modifier.size(18.dp),
-                imageVector = Icons.Outlined.LibraryBooks,
+                imageVector = Icons.AutoMirrored.Outlined.LibraryBooks,
                 contentDescription = null
             )
 

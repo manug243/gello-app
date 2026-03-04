@@ -3,7 +3,9 @@ package de.gello.app.feature.overview
 import de.gello.domain.model.Journal
 
 sealed interface OverviewState {
-    sealed interface Intent
+    sealed interface Intent {
+        data class NavigateToOneJournal(val id: Int) : Intent
+    }
 
     data object Loading : OverviewState
 

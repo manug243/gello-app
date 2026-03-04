@@ -17,20 +17,25 @@ fun OverviewScreen(viewmodel: OverviewViewModel) {
     }
 
     OverviewScreenImpl(
-        state = state
+        state = state,
+        executeIntent = viewmodel::executeIntent
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun OverviewScreenImpl(
-    state: OverviewState
+    state: OverviewState,
+    executeIntent: (OverviewState.Intent) -> Unit
 ) {
     when (state) {
         is OverviewState.Loading -> CoveringProgressIndicator()
         is OverviewState.Default -> {
             OverviewPage(
-                state = state
+                state = state,
+                onClick = { id ->
+                    executeIntent(OverviewState.Intent.NavigateToOneJournal(id = id))
+                }
             )
         }
     }

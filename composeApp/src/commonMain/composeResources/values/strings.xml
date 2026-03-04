@@ -29,5 +29,9 @@
     <string name="registration_success_subtitle">Your registration was successful. Dive into your lab projects and get started.</string>
     <string name="registration_continue_hint">(tap to continue)</string>
 
+    <string name="overview_hint_no_journals">No journal created yet. Be the first to create a journal.</string>
+
     <string name="create_journal_select_color">Select your journal color indicator:</string>
+
+    <string name="journal_detail_hint_no_entries">No entry created yet. Be the first to create an entry.</string>
 </resources>
