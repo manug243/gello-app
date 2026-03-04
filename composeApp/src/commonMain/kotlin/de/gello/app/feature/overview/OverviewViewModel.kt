@@ -28,7 +28,10 @@ class OverviewViewModel(
                         sendUIEvent(UIEvent.Snackbar(it.message))
                     },
                     onSuccess = { data ->
-                        setState(Default(journals = data))
+                        setState(Default(
+                            journals = data,
+                            allJournals = data
+                        ))
                     }
                 )
         }
@@ -57,6 +60,26 @@ class OverviewViewModel(
                     NavigationEvent.NavigateTo(Screen.JournalDetails(id = intent.id))
                 )
             }
+
+            is Default.Intent.Query -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleQueryIntent
+            )
         }
+    }
+
+    private fun handleQueryIntent(state: Default, intent: Default.Intent.Query) {
+        val query = intent.value
+
+        val filtered = state.allJournals.filter {
+            query.isBlank() || it.title.contains(query, ignoreCase = true)
+        }
+
+        setState(
+            state.copy(
+                query = intent.value,
+                journals = filtered
+            )
+        )
     }
 }
