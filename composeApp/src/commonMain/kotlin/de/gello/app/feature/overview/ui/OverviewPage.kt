@@ -16,10 +16,14 @@ import de.gello.designsystem.component.JournalCard
 import de.gello.designsystem.component.PageWithPaddingSlot
 import de.gello.designsystem.theme.Spacing
 import de.gello.util.helper.DateHelper
+import gello.composeapp.generated.resources.Res
+import gello.composeapp.generated.resources.overview_hint_no_journals
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun OverviewPage(
-    state: OverviewState.Default
+    state: OverviewState.Default,
+    onClick: (id: Int) -> Unit
 ) {
     PageWithPaddingSlot(
         modifier = Modifier
@@ -35,8 +39,8 @@ internal fun OverviewPage(
                     title = journal.title,
                     owner = journal.owner,
                     updatedAt = DateHelper.formatDateString(journal.updatedAt),
-                    entryCount = journal.entries?.count() ?: 0,
-                    onClick = {}
+                    entryCount = journal.entries.count(),
+                    onClick = { onClick(journal.id) }
                 )
             }
 
@@ -45,7 +49,7 @@ internal fun OverviewPage(
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                Text("No journals created yet. Be the first to create a journal.")
+                Text(stringResource(Res.string.overview_hint_no_journals))
             }
         }
     }

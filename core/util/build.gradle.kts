@@ -51,7 +51,9 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.kotlinx.datetime)
                 implementation(compose.ui)
-                // Add KMP dependencies here
+
+                implementation(libs.material3)
+                implementation(compose.materialIconsExtended)
             }
         }
 
