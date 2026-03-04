@@ -35,6 +35,9 @@ private fun OverviewScreenImpl(
                 state = state,
                 onClick = { id ->
                     executeIntent(OverviewState.Intent.NavigateToOneJournal(id = id))
+                },
+                onQueryChanged = {
+                    executeIntent(OverviewState.Default.Intent.Query(it))
                 }
             )
         }

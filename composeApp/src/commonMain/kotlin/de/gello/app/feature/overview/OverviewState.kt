@@ -11,8 +11,12 @@ sealed interface OverviewState {
 
     data class Default(
         val journals: List<Journal> = emptyList(),
+        val allJournals: List<Journal> = emptyList(),
+        val query: String = "",
         val showError: Boolean = false
     ) : OverviewState {
-        sealed interface Intent : OverviewState.Intent
+        sealed interface Intent : OverviewState.Intent {
+            data class Query(val value: String) : Intent
+        }
     }
 }
