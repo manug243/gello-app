@@ -14,7 +14,7 @@ sealed interface JournalDetailState {
         val showError: Boolean = false
     ) : JournalDetailState {
         sealed interface Intent : JournalDetailState.Intent {
-
+            data object AddButton : Intent
         }
     }
 }

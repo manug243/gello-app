@@ -22,6 +22,7 @@
     <string name="button_create_journal">Create journal</string>
     <string name="button_select">Select</string>
     <string name="button_logout">Logout</string>
+    <string name="button_add">Add</string>
 
     <string name="registration_header_title">Join Gello and Track Your Experiments</string>
     <string name="registration_header_subtitle">Your Lab Journal in one app – organize projects, track experiments, and analyze gels effortlessly!</string>

@@ -3,6 +3,7 @@ package de.gello.app.feature.journalDetail
 import androidx.lifecycle.viewModelScope
 import com.skash.forge.navigation.NavigationEvent
 import com.skash.forge.outcome.onEachOutcome
+import de.gello.app.event.UIEvent
 import de.gello.app.feature.journalDetail.JournalDetailState.Default
 import de.gello.app.feature.journalDetail.JournalDetailState.Intent
 import de.gello.app.util.BaseViewModel
@@ -33,6 +34,7 @@ class JournalDetailViewModel(
     override fun executeIntent(intent: Intent) {
         when (intent) {
             Intent.NavigateUp -> dispatchNavigationEvent(NavigationEvent.NavigateUp)
+            Default.Intent.AddButton -> sendUIEvent(UIEvent.Snackbar("Not implemented yet"))
         }
     }
 }
