@@ -19,6 +19,7 @@ import de.gello.app.feature.settings.SettingsViewModel
 import de.gello.app.feature.auth.login.LoginViewModel
 import de.gello.app.feature.auth.registration.RegistrationViewModel
 import de.gello.app.feature.journalCreation.JournalCreationViewModel
+import de.gello.app.feature.journalDetail.JournalDetailViewModel
 import de.gello.app.feature.overview.OverviewViewModel
 import de.gello.data.session.SessionManager
 import de.gello.data.session.TokenAuthenticatorImpl
@@ -28,6 +29,7 @@ import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import de.gello.domain.usecase.RegisterUserUseCase
 import de.gello.domain.usecase.journal.CreateJournalUseCase
 import de.gello.domain.usecase.journal.FetchJournalsUseCase
+import de.gello.domain.usecase.journal.FetchOneJournalUseCase
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -41,6 +43,7 @@ val appModule = module {
     viewModelOf(::SettingsViewModel)
     viewModelOf(::OverviewViewModel)
     viewModelOf(::JournalCreationViewModel)
+    viewModelOf(::JournalDetailViewModel)
 
     single<EventBus<UIEvent>> { DefaultEventBus() }
     single<SessionExpirationHandler> { SessionManager(get()) }
@@ -73,4 +76,5 @@ val appModule = module {
     factory { RegisterUserUseCase(get()) }
     factory { FetchJournalsUseCase(get()) }
     factory { CreateJournalUseCase(get()) }
+    factory { FetchOneJournalUseCase(get()) }
 }

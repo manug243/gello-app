@@ -19,6 +19,8 @@ sealed class ErrorType(
 
     data object FetchJournalsFailed : ErrorType("Fetch failed")
 
+    data object FetchEntriesFailed: ErrorType("Fetch of entries failed.")
+
     data object CreateJournalFailed : ErrorType("Creation of journal failed")
 }
 
