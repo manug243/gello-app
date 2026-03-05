@@ -1,5 +1,7 @@
 package de.gello.app.feature.journalDetail
 
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -82,8 +84,13 @@ private fun DefaultsPage(
             TopAppBarWithBackNavigationAndActionButton(
                 title = state.journal.title,
                 onNavigateBack = onNavigateBack,
-                onClickActionButton = onClickActionButton,
-                buttonTitle = stringResource(Res.string.button_add)
+                actionButtonContent = {
+                    TextButton(
+                        onClick = onClickActionButton
+                    ) {
+                        Text(text = stringResource(Res.string.button_add))
+                    }
+                }
             )
         }
     ) {

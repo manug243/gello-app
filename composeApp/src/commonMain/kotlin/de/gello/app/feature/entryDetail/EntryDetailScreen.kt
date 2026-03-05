@@ -1,5 +1,9 @@
 package de.gello.app.feature.entryDetail
 
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -8,7 +12,7 @@ import de.gello.app.event.UIEventHandler
 import de.gello.app.feature.entryDetail.ui.EntryDetailPage
 import de.gello.designsystem.component.CoveringProgressIndicator
 import de.gello.designsystem.component.ScreenScaffold
-import de.gello.designsystem.component.TopAppBarWithBackNavigation
+import de.gello.designsystem.component.TopAppBarWithBackNavigationAndActionButton
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -40,6 +44,9 @@ private fun EntryDetailScreenImpl(
                     state = state,
                     onNavigateBack = {
                         executeIntent(EntryDetailState.Intent.NavigateUp)
+                    },
+                    onClickButton = {
+                        executeIntent(EntryDetailState.Default.Intent.DeleteButton)
                     }
                 )
         }
@@ -50,14 +57,25 @@ private fun EntryDetailScreenImpl(
 private fun DefaultsPage(
     snackBarHost: @Composable () -> Unit = {},
     state: EntryDetailState.Default,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onClickButton: () -> Unit
 ) {
     ScreenScaffold(
         snackbarHost = snackBarHost,
         topBar = {
-            TopAppBarWithBackNavigation(
+            TopAppBarWithBackNavigationAndActionButton(
                 title = state.entry.name,
-                onNavigateBack = onNavigateBack
+                onNavigateBack = onNavigateBack,
+                actionButtonContent = {
+                    IconButton(
+                        onClick = onClickButton
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Delete,
+                            contentDescription = null
+                        )
+                    }
+                }
             )
         }
     ) {

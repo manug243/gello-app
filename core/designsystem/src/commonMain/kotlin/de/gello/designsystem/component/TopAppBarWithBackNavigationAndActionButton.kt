@@ -2,7 +2,6 @@ package de.gello.designsystem.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -16,8 +15,7 @@ import androidx.compose.runtime.Composable
 fun TopAppBarWithBackNavigationAndActionButton(
     title: String,
     onNavigateBack: () -> Unit,
-    onClickActionButton: () -> Unit,
-    buttonTitle: String
+    actionButtonContent: @Composable () -> Unit
 ) {
     TopAppBar(
         title = {
@@ -33,12 +31,6 @@ fun TopAppBarWithBackNavigationAndActionButton(
                 )
             }
         },
-        actions = {
-            TextButton(
-                onClick = onClickActionButton
-            ) {
-                Text(text = buttonTitle)
-            }
-        }
+        actions = { actionButtonContent() }
     )
 }

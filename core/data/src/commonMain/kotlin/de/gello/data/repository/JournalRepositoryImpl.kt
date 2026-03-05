@@ -63,4 +63,12 @@ class JournalRepositoryImpl(
                 get(Api.Project.Entry(journalId, entryId))
             }
         )
+
+    override suspend fun deleteEntry(journalId: Int, entryId: Int): ApiResponse<Unit> =
+        httpClient.execute<Unit, Unit>(
+            mapper = {},
+            requestBuilder = {
+                delete(Api.Project.DeleteEntry(journalId, entryId))
+            }
+        )
 }

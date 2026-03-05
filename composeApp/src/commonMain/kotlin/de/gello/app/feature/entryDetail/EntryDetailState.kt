@@ -14,7 +14,7 @@ sealed interface EntryDetailState {
         val showError: Boolean = false
     ) : EntryDetailState {
         sealed interface Intent : EntryDetailState.Intent {
-
+            data object DeleteButton : Intent
         }
     }
 }
