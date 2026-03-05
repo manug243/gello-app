@@ -28,10 +28,7 @@ class OverviewViewModel(
                         sendUIEvent(UIEvent.Snackbar(it.message))
                     },
                     onSuccess = { data ->
-                        setState(Default(
-                            journals = data,
-                            allJournals = data
-                        ))
+                        setState(Default(journals = data, allJournals = data))
                     }
                 )
         }
@@ -55,11 +52,10 @@ class OverviewViewModel(
 
     override fun executeIntent(intent: OverviewState.Intent) {
         when (intent) {
-            is OverviewState.Intent.NavigateToOneJournal -> {
+            is OverviewState.Intent.NavigateToOneJournal ->
                 dispatchNavigationEvent(
                     NavigationEvent.NavigateTo(Screen.JournalDetails(id = intent.id))
                 )
-            }
 
             is Default.Intent.Query -> handleIntent<_, _>(
                 intent = intent,

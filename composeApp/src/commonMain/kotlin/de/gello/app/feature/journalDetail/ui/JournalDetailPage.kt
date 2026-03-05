@@ -31,18 +31,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.gello.app.feature.journalDetail.JournalDetailState
 import de.gello.designsystem.component.PageWithPaddingSlot
+import de.gello.designsystem.component.SearchField
 import de.gello.designsystem.theme.Spacing
 import de.gello.util.enums.EntryEnum
 import de.gello.util.helper.DateHelper
 import de.gello.util.helper.parseHexColor
 import gello.composeapp.generated.resources.Res
 import gello.composeapp.generated.resources.journal_detail_hint_no_entries
+import gello.composeapp.generated.resources.overview_hint_no_matching_results
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun JournalDetailPage(
-    state: JournalDetailState.Default
+    state: JournalDetailState.Default,
+    onEntryClick: (id: Int) -> Unit,
+    onQueryChanged: (String) -> Unit
 ) {
+    val emptyText: String? = when {
+        state.journal.entries.isEmpty() ->
+            stringResource(Res.string.journal_detail_hint_no_entries)
+
+        state.query.isNotBlank() && state.allEntries.isEmpty() ->
+            stringResource(Res.string.overview_hint_no_matching_results, state.query)
+
+        else -> null
+    }
 
     PageWithPaddingSlot(
         modifier = Modifier
@@ -53,6 +66,10 @@ internal fun JournalDetailPage(
         Column(
             verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
         ) {
+            SearchField(
+                query = state.query,
+                onQueryChanged = onQueryChanged
+            )
 
             state.journal.description?.let { description ->
                 Text(
@@ -61,7 +78,7 @@ internal fun JournalDetailPage(
                 )
             }
 
-            state.journal.entries.forEach { entry ->
+            state.allEntries.forEach { entry ->
 
                 val entryIcon = EntryEnum.entries.firstOrNull { it.id == entry.id }
                     ?: EntryEnum.NOTE
@@ -72,16 +89,16 @@ internal fun JournalDetailPage(
                     updatedAt = DateHelper.formatDateString(entry.updatedAt),
                     indicatorColor = state.journal.color,
                     entryType = entryIcon,
-                    onClick = {}
+                    onClick = { onEntryClick(entry.id) }
                 )
             }
 
             AnimatedVisibility(
-                visible = state.journal.entries.isEmpty(),
+                visible = emptyText != null,
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                Text(stringResource(Res.string.journal_detail_hint_no_entries))
+                Text(emptyText.orEmpty())
             }
         }
     }
