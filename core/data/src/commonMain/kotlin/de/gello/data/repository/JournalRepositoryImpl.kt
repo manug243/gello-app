@@ -36,6 +36,14 @@ class JournalRepositoryImpl(
             }
         )
 
+    override suspend fun deleteJournal(journalId: Int): ApiResponse<Unit> =
+        httpClient.execute<Unit, Unit>(
+            mapper = {},
+            requestBuilder = {
+                delete(Api.Project.Delete(journalId))
+            }
+        )
+
     override suspend fun fetchJournal(id: Int): ApiResponse<Journal> =
         httpClient.execute<JournalResponse, Journal>(
             mapper = { response ->

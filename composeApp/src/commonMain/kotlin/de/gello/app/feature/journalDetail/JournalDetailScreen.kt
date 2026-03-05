@@ -1,7 +1,10 @@
 package de.gello.app.feature.journalDetail
 
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -10,12 +13,10 @@ import de.gello.app.event.UIEvent
 import de.gello.app.event.UIEventHandler
 import de.gello.app.feature.journalDetail.ui.JournalDetailPage
 import de.gello.designsystem.component.CoveringProgressIndicator
+import de.gello.designsystem.component.FAB
 import de.gello.designsystem.component.ScreenScaffold
 import de.gello.designsystem.component.TopAppBarWithBackNavigationAndActionButton
-import gello.composeapp.generated.resources.Res
-import gello.composeapp.generated.resources.button_add
 import kotlinx.coroutines.flow.Flow
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun JournalDetailScreen(viewmodel: JournalDetailViewModel) {
@@ -50,8 +51,11 @@ private fun JournalDetailScreenImpl(
                     onNavigateBack = {
                         executeIntent(JournalDetailState.Intent.NavigateUp)
                     },
-                    onClickActionButton = {
+                    onClickAdd = {
                         executeIntent(JournalDetailState.Default.Intent.AddButton)
+                    },
+                    onClickDelete = {
+                        executeIntent(JournalDetailState.Default.Intent.DeleteButton)
                     },
                     onEntryClick = { journalId, entryId ->
                         executeIntent(
@@ -74,7 +78,8 @@ private fun DefaultsPage(
     snackBarHost: @Composable () -> Unit = {},
     state: JournalDetailState.Default,
     onNavigateBack: () -> Unit,
-    onClickActionButton: () -> Unit,
+    onClickAdd: () -> Unit,
+    onClickDelete: () -> Unit,
     onEntryClick: (journalId: Int, entryId: Int) -> Unit,
     onQueryChanged: (String) -> Unit
 ) {
@@ -85,13 +90,23 @@ private fun DefaultsPage(
                 title = state.journal.title,
                 onNavigateBack = onNavigateBack,
                 actionButtonContent = {
-                    TextButton(
-                        onClick = onClickActionButton
+                    IconButton(
+                        onClick = onClickDelete
                     ) {
-                        Text(text = stringResource(Res.string.button_add))
+                        Icon(
+                            imageVector = Icons.Outlined.Delete,
+                            contentDescription = null
+                        )
                     }
                 }
             )
+        },
+        floatingActionButton = {
+            AnimatedVisibility(visible = true) {
+                FAB(
+                    onClick = onClickAdd
+                )
+            }
         }
     ) {
         JournalDetailPage(

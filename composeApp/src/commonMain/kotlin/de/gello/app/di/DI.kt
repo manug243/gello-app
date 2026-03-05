@@ -31,6 +31,7 @@ import de.gello.domain.usecase.RegisterUserUseCase
 import de.gello.domain.usecase.entry.DeleteEntryUseCase
 import de.gello.domain.usecase.entry.FetchOneEntryUseCase
 import de.gello.domain.usecase.journal.CreateJournalUseCase
+import de.gello.domain.usecase.journal.DeleteJournalUseCase
 import de.gello.domain.usecase.journal.FetchJournalsUseCase
 import de.gello.domain.usecase.journal.FetchOneJournalUseCase
 import kotlinx.serialization.json.Json
@@ -83,4 +84,5 @@ val appModule = module {
     factory { FetchOneJournalUseCase(get()) }
     factory { FetchOneEntryUseCase(get()) }
     factory { DeleteEntryUseCase(get()) }
+    factory { DeleteJournalUseCase(get()) }
 }
