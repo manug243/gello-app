@@ -1,6 +1,7 @@
 package de.gello.app.feature.journalDetail
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import de.gello.app.event.UIEvent
@@ -17,6 +18,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun JournalDetailScreen(viewmodel: JournalDetailViewModel) {
     val state by viewmodel.collectStateFlow().collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewmodel.refreshEntries()
+    }
 
     JournalDetailScreenImpl(
         state = state,
@@ -45,6 +50,12 @@ private fun JournalDetailScreenImpl(
                     },
                     onClickActionButton = {
                         executeIntent(JournalDetailState.Default.Intent.AddButton)
+                    },
+                    onEntryClick = {
+                        executeIntent(JournalDetailState.Intent.NavigateToEntry(it))
+                    },
+                    onQueryChanged = {
+                        executeIntent(JournalDetailState.Default.Intent.Query(it))
                     }
                 )
             }
@@ -57,7 +68,9 @@ private fun DefaultsPage(
     snackBarHost: @Composable () -> Unit = {},
     state: JournalDetailState.Default,
     onNavigateBack: () -> Unit,
-    onClickActionButton: () -> Unit
+    onClickActionButton: () -> Unit,
+    onEntryClick: (Int) -> Unit,
+    onQueryChanged: (String) -> Unit
 ) {
     ScreenScaffold(
         snackbarHost = snackBarHost,
@@ -71,7 +84,11 @@ private fun DefaultsPage(
         }
     ) {
         JournalDetailPage(
-            state = state
+            state = state,
+            onEntryClick = { id ->
+                onEntryClick(id)
+            },
+            onQueryChanged = onQueryChanged
         )
     }
 }
