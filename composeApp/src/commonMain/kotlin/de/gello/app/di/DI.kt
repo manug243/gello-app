@@ -28,6 +28,7 @@ import de.gello.domain.usecase.LoginUseCase
 import de.gello.domain.usecase.LogoutUseCase
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import de.gello.domain.usecase.RegisterUserUseCase
+import de.gello.domain.usecase.entry.DeleteEntryUseCase
 import de.gello.domain.usecase.entry.FetchOneEntryUseCase
 import de.gello.domain.usecase.journal.CreateJournalUseCase
 import de.gello.domain.usecase.journal.FetchJournalsUseCase
@@ -81,4 +82,5 @@ val appModule = module {
     factory { CreateJournalUseCase(get()) }
     factory { FetchOneJournalUseCase(get()) }
     factory { FetchOneEntryUseCase(get()) }
+    factory { DeleteEntryUseCase(get()) }
 }

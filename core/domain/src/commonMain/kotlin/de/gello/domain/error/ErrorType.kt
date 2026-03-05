@@ -19,11 +19,13 @@ sealed class ErrorType(
 
     data object FetchJournalsFailed : ErrorType("Fetch of journals failed")
 
-    data object FetchEntriesFailed: ErrorType("Fetch of entries failed")
+    data object FetchEntriesFailed : ErrorType("Fetch of entries failed")
 
-    data object FetchEntryFailed: ErrorType("Fetch of entry failed")
+    data object FetchEntryFailed : ErrorType("Fetch of entry failed")
 
     data object CreateJournalFailed : ErrorType("Creation of journal failed")
+
+    data object DeleteError : ErrorType("Error while trying to delete")
 }
 
 inline fun ApiResponse.Error.toErrorType(defaultErrorType: ApiResponse.Error.Unspecified.() -> ErrorType): ErrorType =
