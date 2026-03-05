@@ -10,6 +10,8 @@ data class EntryResponse(
     val createdAt: String,
     @SerialName("id")
     val id: Int,
+    @SerialName("project")
+    val project: Int? = null, // need to remove null possibility when be updated missing projectId
     @SerialName("name")
     val name: String,
     @SerialName("updated_at")

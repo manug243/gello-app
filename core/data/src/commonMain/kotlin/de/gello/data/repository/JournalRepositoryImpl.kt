@@ -55,4 +55,12 @@ class JournalRepositoryImpl(
                 get(Api.Project.Entries(id))
             }
         )
+
+    override suspend fun fetchEntry(journalId: Int, entryId: Int): ApiResponse<Entry> =
+        httpClient.execute<EntryResponse, Entry>(
+            mapper = { it.toEntry() },
+            requestBuilder = {
+                get(Api.Project.Entry(journalId, entryId))
+            }
+        )
 }

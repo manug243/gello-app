@@ -41,7 +41,7 @@ private fun JournalDetailScreenImpl(
     ) { snackBarHost ->
         when (state) {
             is JournalDetailState.Loading -> CoveringProgressIndicator()
-            is JournalDetailState.Default -> {
+            is JournalDetailState.Default ->
                 DefaultsPage(
                     snackBarHost = snackBarHost,
                     state = state,
@@ -51,14 +51,18 @@ private fun JournalDetailScreenImpl(
                     onClickActionButton = {
                         executeIntent(JournalDetailState.Default.Intent.AddButton)
                     },
-                    onEntryClick = {
-                        executeIntent(JournalDetailState.Intent.NavigateToEntry(it))
+                    onEntryClick = { journalId, entryId ->
+                        executeIntent(
+                            JournalDetailState.Intent.NavigateToEntry(
+                                journalId = journalId,
+                                entryId = entryId
+                            )
+                        )
                     },
                     onQueryChanged = {
                         executeIntent(JournalDetailState.Default.Intent.Query(it))
                     }
                 )
-            }
         }
     }
 }
@@ -69,7 +73,7 @@ private fun DefaultsPage(
     state: JournalDetailState.Default,
     onNavigateBack: () -> Unit,
     onClickActionButton: () -> Unit,
-    onEntryClick: (Int) -> Unit,
+    onEntryClick: (journalId: Int, entryId: Int) -> Unit,
     onQueryChanged: (String) -> Unit
 ) {
     ScreenScaffold(
@@ -85,8 +89,8 @@ private fun DefaultsPage(
     ) {
         JournalDetailPage(
             state = state,
-            onEntryClick = { id ->
-                onEntryClick(id)
+            onEntryClick = { journalId, entryId ->
+                onEntryClick(journalId, entryId)
             },
             onQueryChanged = onQueryChanged
         )

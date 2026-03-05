@@ -6,7 +6,7 @@ import de.gello.domain.model.Journal
 sealed interface JournalDetailState {
     sealed interface Intent {
         data object NavigateUp : Intent
-        data class NavigateToEntry(val id: Int) : Intent
+        data class NavigateToEntry(val journalId: Int, val entryId: Int) : Intent
     }
 
     data object Loading : JournalDetailState
