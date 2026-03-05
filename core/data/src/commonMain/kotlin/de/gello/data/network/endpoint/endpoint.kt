@@ -15,6 +15,7 @@ internal object Api {
 
     object Project : Route(BASE_URL, "project") {
         object Create : Route(this, "create")
+        class Delete(id: Int) : Route(this, "delete/$id")
         class Get(id: Int) : Route(this, "read/$id")
         class Entries(id: Int) : Route(this, "$id")
         class Entry(projectId: Int, entryId: Int) : Route(this, "$projectId/read/$entryId")

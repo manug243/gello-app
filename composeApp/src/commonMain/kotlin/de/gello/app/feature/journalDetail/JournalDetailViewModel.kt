@@ -9,6 +9,7 @@ import de.gello.app.feature.journalDetail.JournalDetailState.Default
 import de.gello.app.feature.journalDetail.JournalDetailState.Intent
 import de.gello.app.navigation.Screen
 import de.gello.app.util.BaseViewModel
+import de.gello.domain.usecase.journal.DeleteJournalUseCase
 import de.gello.domain.usecase.journal.FetchOneJournalUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 
 class JournalDetailViewModel(
     private val journalId: Int,
-    private val fetchOneJournalUseCase: FetchOneJournalUseCase
+    private val fetchOneJournalUseCase: FetchOneJournalUseCase,
+    private val deleteJournalUseCase: DeleteJournalUseCase
 ) : BaseViewModel<JournalDetailState, Intent>(
     initialState = Default(),
     useEventBus = false
@@ -75,6 +77,11 @@ class JournalDetailViewModel(
 
             is Default.Intent.AddButton -> sendUIEvent(UIEvent.Snackbar("Not implemented yet"))
 
+            is Default.Intent.DeleteButton -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleDeleteJournal
+            )
+
             is Default.Intent.Query -> handleIntent<_, _>(
                 intent = intent,
                 handler = ::handleQueryIntent
@@ -96,5 +103,24 @@ class JournalDetailViewModel(
                 allEntries = filtered
             )
         )
+    }
+
+    private fun handleDeleteJournal(
+        state: Default,
+        intent: Default.Intent.DeleteButton
+    ) {
+        viewModelScope.launch {
+            deleteJournalUseCase(
+                DeleteJournalUseCase.Params(
+                    journalId = journalId
+                )
+            ).collectOutcome(
+                onProgress = { setState(JournalDetailState.Loading) },
+                onFailure = { showSnackbar(it.message) },
+                onSuccess = {
+                    dispatchNavigationEvent(NavigationEvent.NavigateUp)
+                }
+            )
+        }
     }
 }

@@ -19,7 +19,8 @@ sealed interface JournalDetailState {
     ) : JournalDetailState {
         sealed interface Intent : JournalDetailState.Intent {
             data object AddButton : Intent
-            data class Query(val value: String): Intent
+            data object DeleteButton : Intent
+            data class Query(val value: String) : Intent
         }
     }
 }
