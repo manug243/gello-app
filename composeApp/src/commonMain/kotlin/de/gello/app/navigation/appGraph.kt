@@ -3,6 +3,7 @@ package de.gello.app.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.toRoute
 import com.skash.forge.navigation.nav2.composableWithTransition
+import de.gello.app.feature.entryDetail.EntryDetailScreen
 import de.gello.app.feature.journalCreation.JournalCreationScreen
 import de.gello.app.feature.journalCreation.JournalCreationViewModel
 import de.gello.app.feature.journalDetail.JournalDetailScreen
@@ -29,6 +30,16 @@ fun NavGraphBuilder.appGraph() {
 
         JournalDetailScreen(
             viewmodel = koinViewModel(parameters = { parametersOf(route.id) })
+        )
+    }
+
+    composableWithTransition<Screen.EntryDetails> {
+        val route = it.toRoute<Screen.EntryDetails>()
+
+        EntryDetailScreen(
+            viewmodel = koinViewModel(
+                parameters = { parametersOf(route.journalId, route.entryId) }
+            )
         )
     }
 }

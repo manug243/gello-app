@@ -44,7 +44,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun JournalDetailPage(
     state: JournalDetailState.Default,
-    onEntryClick: (id: Int) -> Unit,
+    onEntryClick: (journalId: Int, entryId: Int) -> Unit,
     onQueryChanged: (String) -> Unit
 ) {
     val emptyText: String? = when {
@@ -89,7 +89,7 @@ internal fun JournalDetailPage(
                     updatedAt = DateHelper.formatDateString(entry.updatedAt),
                     indicatorColor = state.journal.color,
                     entryType = entryIcon,
-                    onClick = { onEntryClick(entry.id) }
+                    onClick = { onEntryClick(entry.journalId ?: 1,entry.id) } // need to fix, when be updated with projectId
                 )
             }
 

@@ -7,6 +7,7 @@ import com.skash.forge.outcome.onEachOutcome
 import de.gello.app.event.UIEvent
 import de.gello.app.feature.journalDetail.JournalDetailState.Default
 import de.gello.app.feature.journalDetail.JournalDetailState.Intent
+import de.gello.app.navigation.Screen
 import de.gello.app.util.BaseViewModel
 import de.gello.domain.usecase.journal.FetchOneJournalUseCase
 import kotlinx.coroutines.flow.SharingStarted
@@ -63,7 +64,14 @@ class JournalDetailViewModel(
         when (intent) {
             is Intent.NavigateUp -> dispatchNavigationEvent(NavigationEvent.NavigateUp)
 
-            is Intent.NavigateToEntry -> sendUIEvent(UIEvent.Snackbar("Not implemented yet"))
+            is Intent.NavigateToEntry -> dispatchNavigationEvent(
+                NavigationEvent.NavigateTo(
+                    Screen.EntryDetails(
+                        journalId = intent.journalId,
+                        entryId = intent.entryId
+                    )
+                )
+            )
 
             is Default.Intent.AddButton -> sendUIEvent(UIEvent.Snackbar("Not implemented yet"))
 

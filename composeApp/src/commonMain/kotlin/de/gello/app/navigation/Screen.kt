@@ -15,4 +15,7 @@ sealed interface Screen {
 
     @Serializable
     data class JournalDetails(val id: Int) : Screen
+
+    @Serializable
+    data class EntryDetails(val journalId: Int, val entryId: Int) : Screen
 }

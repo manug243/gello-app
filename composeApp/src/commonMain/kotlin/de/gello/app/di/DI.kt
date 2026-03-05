@@ -18,6 +18,7 @@ import de.gello.app.event.UIEvent
 import de.gello.app.feature.settings.SettingsViewModel
 import de.gello.app.feature.auth.login.LoginViewModel
 import de.gello.app.feature.auth.registration.RegistrationViewModel
+import de.gello.app.feature.entryDetail.EntryDetailViewModel
 import de.gello.app.feature.journalCreation.JournalCreationViewModel
 import de.gello.app.feature.journalDetail.JournalDetailViewModel
 import de.gello.app.feature.overview.OverviewViewModel
@@ -27,6 +28,7 @@ import de.gello.domain.usecase.LoginUseCase
 import de.gello.domain.usecase.LogoutUseCase
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import de.gello.domain.usecase.RegisterUserUseCase
+import de.gello.domain.usecase.entry.FetchOneEntryUseCase
 import de.gello.domain.usecase.journal.CreateJournalUseCase
 import de.gello.domain.usecase.journal.FetchJournalsUseCase
 import de.gello.domain.usecase.journal.FetchOneJournalUseCase
@@ -44,6 +46,7 @@ val appModule = module {
     viewModelOf(::OverviewViewModel)
     viewModelOf(::JournalCreationViewModel)
     viewModelOf(::JournalDetailViewModel)
+    viewModelOf(::EntryDetailViewModel)
 
     single<EventBus<UIEvent>> { DefaultEventBus() }
     single<SessionExpirationHandler> { SessionManager(get()) }
@@ -77,4 +80,5 @@ val appModule = module {
     factory { FetchJournalsUseCase(get()) }
     factory { CreateJournalUseCase(get()) }
     factory { FetchOneJournalUseCase(get()) }
+    factory { FetchOneEntryUseCase(get()) }
 }
