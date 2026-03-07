@@ -32,7 +32,11 @@ class JournalRepositoryImpl(
             mapper = {},
             requestBuilder = {
                 post(Api.Project.Create)
-                body(JournalRequest(name = journal.title))
+                body(JournalRequest(
+                    name = journal.title,
+                    description = journal.description.orEmpty(),
+                    indicatorColor = journal.color
+                ))
             }
         )
 

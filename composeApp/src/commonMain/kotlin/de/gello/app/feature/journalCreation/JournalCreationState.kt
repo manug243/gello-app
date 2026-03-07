@@ -1,6 +1,7 @@
 package de.gello.app.feature.journalCreation
 
 import de.gello.domain.model.Journal
+import de.gello.domain.model.User
 
 sealed interface JournalCreationState {
     sealed interface Intent {
@@ -10,6 +11,7 @@ sealed interface JournalCreationState {
     data object Loading : JournalCreationState
 
     data class Default(
+        val user: User? = User.emptyUser,
         val journal: Journal = Journal.emptyJournal,
         val showError: Boolean = false
     ) : JournalCreationState {

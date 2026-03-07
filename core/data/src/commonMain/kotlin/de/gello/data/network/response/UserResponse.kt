@@ -8,5 +8,9 @@ data class UserResponse(
     @SerialName("id")
     val id: Int,
     @SerialName("username")
-    val username: String
+    val username: String,
+    @SerialName("first_name")
+    val firstname: String,
+    @SerialName("last_name")
+    val lastname: String
 )

@@ -6,10 +6,11 @@ import kotlinx.serialization.Serializable
 data class Journal(
     val id: Int,
     val title: String,
-    val description: String? = null,
+    val description: String?,
     val color: String,
-    val owner: String,
+    val owner: User?,
     val updatedAt: String,
+    val entryCount: Int?,
     val entries: List<Entry>
 ) {
     companion object {
@@ -17,9 +18,16 @@ data class Journal(
         val emptyJournal = Journal(
             id = -1,
             title = "",
+            description = "",
             color = "",
-            owner = "",
+            owner = User(
+                id = -1,
+                username = "",
+                firstname = "",
+                lastname = ""
+            ),
             updatedAt = "",
+            entryCount = 0,
             entries = emptyList()
         )
     }

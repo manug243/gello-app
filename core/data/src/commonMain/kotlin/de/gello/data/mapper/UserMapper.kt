@@ -5,5 +5,7 @@ import de.gello.domain.model.User
 
 internal fun UserResponse.toUser() = User(
     id = id,
-    username = username
+    username = username,
+    firstname = firstname,
+    lastname = lastname,
 )
