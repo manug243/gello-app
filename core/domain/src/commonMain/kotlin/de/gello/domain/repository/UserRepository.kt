@@ -9,5 +9,7 @@ interface UserRepository {
 
     suspend fun authenticateUser(username: String, password: String): ApiResponse<Token>
 
-    suspend fun registerUser(username: String, password: String): ApiResponse<Unit>
+    suspend fun registerUser(
+        username: String, password: String, firstname: String, lastname: String
+    ): ApiResponse<Unit>
 }

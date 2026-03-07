@@ -56,9 +56,9 @@ internal fun OverviewPage(
                 JournalCard(
                     colorIndicator = journal.color,
                     title = journal.title,
-                    owner = journal.owner,
+                    owner = "${journal.owner?.firstname} ${journal.owner?.lastname}",
                     updatedAt = DateHelper.formatDateString(journal.updatedAt),
-                    entryCount = journal.entries.count(),
+                    entryCount = journal.entryCount ?: 0,
                     onClick = { onClick(journal.id) }
                 )
             }

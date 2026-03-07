@@ -24,6 +24,7 @@ import de.gello.app.feature.journalDetail.JournalDetailViewModel
 import de.gello.app.feature.overview.OverviewViewModel
 import de.gello.data.session.SessionManager
 import de.gello.data.session.TokenAuthenticatorImpl
+import de.gello.domain.usecase.FetchUserUseCase
 import de.gello.domain.usecase.LoginUseCase
 import de.gello.domain.usecase.LogoutUseCase
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
@@ -79,6 +80,7 @@ val appModule = module {
     factory { LoginUseCase(get(), get()) }
     factory { LogoutUseCase(get(), get()) }
     factory { RegisterUserUseCase(get()) }
+    factory { FetchUserUseCase(get()) }
     factory { FetchJournalsUseCase(get()) }
     factory { CreateJournalUseCase(get()) }
     factory { FetchOneJournalUseCase(get()) }

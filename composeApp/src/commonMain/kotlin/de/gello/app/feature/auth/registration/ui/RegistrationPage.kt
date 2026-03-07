@@ -114,7 +114,7 @@ private fun RegisterForm(
         )
 
         TextField(
-            value = state.surname,
+            value = state.lastname,
             placeholder = stringResource(Res.string.placeholder_surname),
             onValueChanged = onSurnameChange,
             contentType = ContentType.PersonLastName,

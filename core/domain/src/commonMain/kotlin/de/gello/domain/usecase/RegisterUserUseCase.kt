@@ -13,7 +13,9 @@ class RegisterUserUseCase(
 
     data class Params(
         val username: String,
-        val password: String
+        val password: String,
+        val firstname: String,
+        val lastname: String
     )
 
     override suspend fun FlowCollector<Outcome<Unit, ErrorType>>.execute(
@@ -21,7 +23,9 @@ class RegisterUserUseCase(
     ) {
         val result = userRepository.registerUser(
             username = params.username,
-            password = params.password
+            password = params.password,
+            firstname = params.firstname,
+            lastname = params.lastname
         )
 
         emitFrom(result) {

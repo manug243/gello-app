@@ -40,15 +40,20 @@ class UserRepositoryImpl(
 
     override suspend fun registerUser(
         username: String,
-        password: String
+        password: String,
+        firstname: String,
+        lastname: String
     ): ApiResponse<Unit> =
         httpClient.execute<Unit, Unit>(
             requestBuilder = {
                 post(Api.Auth.Register)
-                body(RegisterRequest(username = username, password = password))
+                body(RegisterRequest(
+                    username = username,
+                    password = password,
+                    firstname = firstname,
+                    lastname = lastname,
+                ))
             },
             mapper = {}
         )
-
-
 }

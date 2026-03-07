@@ -27,7 +27,7 @@ class RegistrationViewModel(
             }
 
             is RegistrationState.Default.Intent.SetSurname -> reduceState<RegistrationState.Default> {
-                copy(surname = intent.value, showError = false)
+                copy(lastname = intent.value, showError = false)
             }
 
             is RegistrationState.Default.Intent.SetUsername -> reduceState<RegistrationState.Default> {
@@ -51,7 +51,9 @@ class RegistrationViewModel(
             registerUserUseCase(
                 params = RegisterUserUseCase.Params(
                     username = state.username,
-                    password = state.password
+                    password = state.password,
+                    firstname = state.firstname,
+                    lastname = state.lastname,
                 )
             ).collectOutcome(
                 onProgress = { setState(RegistrationState.Loading) },

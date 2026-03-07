@@ -53,6 +53,11 @@ internal fun JournalCreationPage(
 ) {
     var showColorDialog by remember { mutableStateOf(false) }
 
+    val ownerName = listOfNotNull(
+        state.user?.firstname,
+        state.user?.lastname
+    ).joinToString(" ")
+
     if (showColorDialog) {
         ColorPickerDialog(
             initialColor = state.journal.color,
@@ -91,7 +96,7 @@ internal fun JournalCreationPage(
                     JournalCard(
                         colorIndicator = state.journal.color,
                         title = state.journal.title,
-                        owner = state.journal.owner,
+                        owner = ownerName,
                         updatedAt = DateHelper.formattedTimeStamp(),
                         entryCount = 0,
                         onClick = {}

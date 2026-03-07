@@ -3,17 +3,41 @@ package de.gello.app.feature.journalCreation
 import androidx.lifecycle.viewModelScope
 import com.skash.forge.navigation.NavigationEvent
 import com.skash.forge.outcome.collectOutcome
+import com.skash.forge.outcome.onEachOutcome
+import com.skash.forge.usecase.invoke
 import de.gello.app.util.BaseViewModel
 import de.gello.domain.model.Journal
+import de.gello.domain.usecase.FetchUserUseCase
 import de.gello.domain.usecase.journal.CreateJournalUseCase
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class JournalCreationViewModel(
+    fetchUserUseCase: FetchUserUseCase,
     private val createJournalUseCase: CreateJournalUseCase
 ) : BaseViewModel<JournalCreationState, JournalCreationState.Intent>(
     initialState = JournalCreationState.Default(),
     useEventBus = false
 ) {
+    private val userData = fetchUserUseCase()
+        .onEachOutcome(
+            onProgress = { setState(JournalCreationState.Loading) },
+            onFailure = { showSnackbar(it.message) },
+            onSuccess = { user ->
+                setState(
+                    JournalCreationState.Default(
+                        user = user
+                    )
+                )
+            }
+        )
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = null
+        )
+
     override fun executeIntent(intent: JournalCreationState.Intent) {
         when (intent) {
             is JournalCreationState.Intent.NavigateUp ->

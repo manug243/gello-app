@@ -11,7 +11,7 @@ sealed interface RegistrationState {
 
     data class Default(
         val firstname: String = "",
-        val surname: String = "",
+        val lastname: String = "",
         val username: String = "",
         val password: String = "",
         val repeatedPassword: String = "",
@@ -35,7 +35,7 @@ sealed interface RegistrationState {
 
         val allFieldsFilled: Boolean
             get() {
-                val allFilled = arrayOf(firstname, surname, username, password, repeatedPassword)
+                val allFilled = arrayOf(firstname, lastname, username, password, repeatedPassword)
                     .all { it.isNotBlank() }
 
                 return allFilled && !passwordsMismatch
