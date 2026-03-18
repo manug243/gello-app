@@ -52,7 +52,7 @@ private fun JournalDetailScreenImpl(
                         executeIntent(JournalDetailState.Intent.NavigateUp)
                     },
                     onClickAdd = {
-                        executeIntent(JournalDetailState.Default.Intent.AddButton)
+                        executeIntent(JournalDetailState.Intent.NavigateToEntryCreation)
                     },
                     onClickDelete = {
                         executeIntent(JournalDetailState.Default.Intent.DeleteButton)

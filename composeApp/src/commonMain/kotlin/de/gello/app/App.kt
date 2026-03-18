@@ -1,15 +1,17 @@
 package de.gello.app
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import coil3.ImageLoader
+import coil3.compose.setSingletonImageLoaderFactory
 import de.gello.app.di.appModule
 import de.gello.app.navigation.AppNavigation
 import de.gello.data.di.dataModule
 import de.gello.designsystem.component.CoveringProgressIndicator
 import de.gello.designsystem.theme.AppTheme
+import io.github.vinceglb.filekit.coil.addPlatformFileSupport
 import org.koin.compose.KoinMultiplatformApplication
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -18,6 +20,14 @@ import org.koin.dsl.koinConfiguration
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun GelloApp() {
+    setSingletonImageLoaderFactory { context ->
+        ImageLoader.Builder(context)
+            .components {
+                addPlatformFileSupport()
+            }
+            .build()
+    }
+
     KoinMultiplatformApplication(
         config = koinConfiguration {
             modules(appModule + dataModule)

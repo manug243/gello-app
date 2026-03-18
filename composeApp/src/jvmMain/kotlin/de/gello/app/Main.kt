@@ -13,8 +13,8 @@ fun main() = application {
 
     val screenSize = Toolkit.getDefaultToolkit().screenSize
 
-    val width = (screenSize.width * 0.2).toInt()
-    val height = (screenSize.height * 0.6).toInt()
+    val width = (screenSize.width * 0.25).toInt()
+    val height = (screenSize.height * 0.7).toInt()
 
     Window(
         onCloseRequest = ::exitApplication,

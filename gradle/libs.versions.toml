@@ -26,6 +26,8 @@ androidx-room = "2.8.4"
 buildKonfig = "0.17.1"
 kotlinxDatetime = "0.7.1"
 colorPickerCompose = "1.1.3"
+filekit = "0.12.0"
+krop = "0.3.0-alpha01"
 
 [libraries]
 
@@ -56,8 +58,12 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
-kotlinx-coroutines-swing= { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesCore" }
 compose-colorpicker = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorPickerCompose" }
+filekit-dialogs-compose = { module = "io.github.vinceglb:filekit-dialogs-compose", version.ref = "filekit" }
+filekit-coil = { module = "io.github.vinceglb:filekit-coil", version.ref = "filekit" }
+krop-ui = { module = "com.attafitamim.krop:ui", version.ref = "krop" }
+krop-extension-filekit = { module = "com.attafitamim.krop:extensions-filekit", version.ref = "krop"}
 
 forge-network-core-client = { module = "com.skash.forge:network-api-client", version.ref = "forge" }
 forge-network-core-response = { module = "com.skash.forge:network-api-response", version.ref = "forge" }

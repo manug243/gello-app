@@ -21,4 +21,6 @@ internal object Api {
         class Entry(projectId: Int, entryId: Int) : Route(this, "$projectId/read/$entryId")
         class DeleteEntry(projectId: Int, entryId: Int) : Route(this, "$projectId/delete/$entryId")
     }
+
+    object GelImage : Route(BASE_URL, "gel/")
 }

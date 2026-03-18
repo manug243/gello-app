@@ -6,7 +6,8 @@ data class Entry(
     val name: String,
     val owner: String,
     val createdAt: String,
-    val updatedAt: String? = ""
+    val updatedAt: String? = "",
+    val typeId: Int? = null
 ) {
     companion object {
         val emptyEntry = Entry(
@@ -15,7 +16,8 @@ data class Entry(
             name = "",
             owner = "",
             createdAt = "",
-            updatedAt = ""
+            updatedAt = "",
+            typeId = -1
         )
     }
 }

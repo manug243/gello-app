@@ -66,6 +66,9 @@ class JournalDetailViewModel(
         when (intent) {
             is Intent.NavigateUp -> dispatchNavigationEvent(NavigationEvent.NavigateUp)
 
+            is Intent.NavigateToEntryCreation ->
+                dispatchNavigationEvent(NavigationEvent.NavigateTo(Screen.EntryCreation))
+
             is Intent.NavigateToEntry -> dispatchNavigationEvent(
                 NavigationEvent.NavigateTo(
                     Screen.EntryDetails(
@@ -74,8 +77,6 @@ class JournalDetailViewModel(
                     )
                 )
             )
-
-            is Default.Intent.AddButton -> sendUIEvent(UIEvent.Snackbar("Not implemented yet"))
 
             is Default.Intent.DeleteButton -> handleIntent<_, _>(
                 intent = intent,
