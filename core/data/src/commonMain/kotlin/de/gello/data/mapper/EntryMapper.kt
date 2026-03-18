@@ -9,6 +9,7 @@ internal fun EntryResponse.toEntry() = Entry(
     name = name,
     owner = "",
     createdAt = createdAt,
-    updatedAt = updatedAt
+    updatedAt = updatedAt,
+    typeId = type
 )
 

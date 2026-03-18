@@ -58,6 +58,9 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.compose.colorpicker)
+            implementation(libs.filekit.coil)
+            implementation(libs.krop.ui)
+            implementation(libs.krop.extension.filekit)
 
             // forge
             implementation(libs.forge.multiplatform.settings)

@@ -1,5 +1,6 @@
 package de.gello.app.di
 
+import coil3.ImageLoader
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.skash.forge.datastore.DataStore
 import com.skash.forge.datastore.multiplatformsettings.MultiplatformSettingsDataStore
@@ -18,6 +19,7 @@ import de.gello.app.event.UIEvent
 import de.gello.app.feature.settings.SettingsViewModel
 import de.gello.app.feature.auth.login.LoginViewModel
 import de.gello.app.feature.auth.registration.RegistrationViewModel
+import de.gello.app.feature.entryCreation.EntryCreationViewModel
 import de.gello.app.feature.entryDetail.EntryDetailViewModel
 import de.gello.app.feature.journalCreation.JournalCreationViewModel
 import de.gello.app.feature.journalDetail.JournalDetailViewModel
@@ -31,10 +33,12 @@ import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import de.gello.domain.usecase.RegisterUserUseCase
 import de.gello.domain.usecase.entry.DeleteEntryUseCase
 import de.gello.domain.usecase.entry.FetchOneEntryUseCase
+import de.gello.domain.usecase.image.UploadGelImageUseCase
 import de.gello.domain.usecase.journal.CreateJournalUseCase
 import de.gello.domain.usecase.journal.DeleteJournalUseCase
 import de.gello.domain.usecase.journal.FetchJournalsUseCase
 import de.gello.domain.usecase.journal.FetchOneJournalUseCase
+import io.github.vinceglb.filekit.coil.addPlatformFileSupport
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -50,6 +54,7 @@ val appModule = module {
     viewModelOf(::JournalCreationViewModel)
     viewModelOf(::JournalDetailViewModel)
     viewModelOf(::EntryDetailViewModel)
+    viewModelOf(::EntryCreationViewModel)
 
     single<EventBus<UIEvent>> { DefaultEventBus() }
     single<SessionExpirationHandler> { SessionManager(get()) }
@@ -87,4 +92,5 @@ val appModule = module {
     factory { FetchOneEntryUseCase(get()) }
     factory { DeleteEntryUseCase(get()) }
     factory { DeleteJournalUseCase(get()) }
+    factory { UploadGelImageUseCase(get()) }
 }

@@ -21,7 +21,8 @@ fun SmallPrimaryButtonWithColor(
         content = {
             Text(
                 text = title,
-                style = ButtonDefaults.textStyleFor(ButtonDefaults.ExtraSmallContainerHeight)
+                style = ButtonDefaults.textStyleFor(ButtonDefaults.ExtraSmallContainerHeight),
+                maxLines = 1
             )
         },
         contentPadding = ButtonDefaults.ExtraSmallContentPadding

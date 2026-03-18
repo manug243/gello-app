@@ -40,6 +40,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.core.util)
+                implementation(libs.filekit.coil)
 
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
