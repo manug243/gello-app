@@ -1,6 +1,5 @@
 package de.gello.app.feature.overview.ui
 
-import androidx.collection.emptyObjectList
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut

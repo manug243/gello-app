@@ -11,8 +11,8 @@ enum class EntryEnum(
     val icon: ImageVector,
     val title: String
 ) {
-    NOTE(1, Icons.AutoMirrored.Outlined.Note, "Notes"),
-    IMAGE(2, Icons.Outlined.PictureAsPdf, "Gel analysis"),
+    IMAGE(1, Icons.Outlined.PictureAsPdf, "Gel analysis"),
+    NOTE(2, Icons.AutoMirrored.Outlined.Note, "Notes"),
     UNKNOWN(-1, Icons.Outlined.DeviceUnknown, "Unknown");
 
     companion object {
