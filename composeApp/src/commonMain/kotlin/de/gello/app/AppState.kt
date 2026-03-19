@@ -8,7 +8,7 @@ sealed interface AppState {
     data object Loading : AppState
 
     data class Loaded(
-        val isLoggedIn: Boolean = false
+        val isLoggedIn: Boolean
     ) : AppState {
         sealed interface Intent
     }

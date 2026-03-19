@@ -1,14 +1,14 @@
 package de.gello.data.session
 
 import com.skash.forge.network.client.HttpClient
+import com.skash.forge.network.client.execute
 import com.skash.forge.network.response.ApiResponse
-import com.skash.forge.network.response.map
-import com.skash.forge.network.response.onSuccess
 import com.skash.forge.network.session.AuthTokens
 import com.skash.forge.network.session.SessionExpirationHandler
 import com.skash.forge.network.session.TokenAuthenticator
 import de.gello.data.network.endpoint.Api
-import de.gello.data.network.endpoint.HeaderValue
+import de.gello.data.network.request.RefreshRequest
+import de.gello.data.network.response.RefreshResponse
 import de.gello.domain.repository.SessionRepository
 
 class TokenAuthenticatorImpl(
@@ -33,32 +33,35 @@ class TokenAuthenticatorImpl(
     }
 
     override suspend fun refreshTokens(httpClient: HttpClient): AuthTokens? {
-        val refresh = sessionRepository
+        val currentRefreshToken = sessionRepository
             .getRefreshToken()
             .getOrNull()
             .takeUnless { it.isNullOrBlank() } ?: return null
 
-        val response = httpClient.executeRaw {
-            post(Api.Auth.Refresh)
-            header(HeaderValue.Bearer(refresh))
-        }.map {
-            // have to check if we need this
-            it.headers["Authorization"]?.firstOrNull().orEmpty().replace("Bearer", "").trim()
-        }.onSuccess { refresh ->
-            sessionRepository.setAuthToken(refresh)
-            sessionRepository.setRefreshToken(refresh)
-        }
+        val response = httpClient.execute<RefreshResponse, AuthTokens>(
+            mapper = {
+                AuthTokens(
+                    bearer = it.access,
+                    refresh = it.refresh
+                )
+            },
+            requestBuilder = {
+                post(Api.Auth.Refresh)
+                body(RefreshRequest(refresh = currentRefreshToken))
+            }
+        )
 
-        when (response) {
+        return when (response) {
             is ApiResponse.Error -> {
                 sessionManagerHandler.onSessionExpired()
-                return null
+                null
             }
 
-            is ApiResponse.Success -> return AuthTokens(
-                bearer = response.body,
-                refresh = response.body
-            )
+            is ApiResponse.Success -> {
+                sessionRepository.setAuthToken(response.body.bearer)
+                sessionRepository.setRefreshToken(response.body.refresh)
+                response.body
+            }
         }
     }
 
