@@ -39,7 +39,7 @@ class TokenAuthenticatorImpl(
             .takeUnless { it.isNullOrBlank() } ?: return null
 
         val response = httpClient.executeRaw {
-            get(Api.Auth.Refresh)
+            post(Api.Auth.Refresh)
             header(HeaderValue.Bearer(refresh))
         }.map {
             // have to check if we need this
