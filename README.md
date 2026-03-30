@@ -82,41 +82,41 @@ UI → Intent → ViewModel → UseCase → Repository → API
 
 ### Backend Setup
 
-### 1. Clone the project
+#### 1. Clone the project
 
-### 2. Install Python
+#### 2. Install Python
 
 Make sure you have the correct python version installed → 3.12.
 
 ```python --version```
 
-### 3. Setup the project
+#### 3. Setup the project
 
 ```make setup```
 
-### 4. Run migrations
+#### 4. Run migrations
 
 ```make migrate```
 
-### 5. Start the backend
+#### 5. Start the backend
 
 ```make run```
 
 ### Frontend Setup
 
-### 1. Open Project
+#### 1. Open Project
 
-### 2. Update IP
+#### 2. Update IP
 
 In the ```core:data``` module (build.gradle), replace the URL with your IP.
 
 You cannot use ```localhost```. You have to use your machines local IP address.
 
-### 3. Sync gradle
+#### 3. Sync gradle
 
 After changing the IP click ```Sync gradle``` in Android Studio.
 
-### 4. Run the project
+#### 4. Run the project
 
 Select your desired target and press ```Play```. Note: If you want to run Android/iOS you need either
 an actual device or you have to have simulator/emulator device ready.
