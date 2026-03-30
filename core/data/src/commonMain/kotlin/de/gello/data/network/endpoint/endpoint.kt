@@ -1,7 +1,6 @@
 package de.gello.data.network.endpoint
 
 import com.skash.forge.network.request.Route
-import de.gello.BuildKonfig
 import de.gello.BuildKonfig.BASE_URL
 
 internal object Api {
@@ -19,6 +18,7 @@ internal object Api {
         class Get(id: Int) : Route(this, "read/$id")
         class Entries(id: Int) : Route(this, "$id")
         class Entry(projectId: Int, entryId: Int) : Route(this, "$projectId/read/$entryId")
+        class CreateEntry(projectId: Int) : Route(this, "$projectId/create")
         class DeleteEntry(projectId: Int, entryId: Int) : Route(this, "$projectId/delete/$entryId")
     }
 
