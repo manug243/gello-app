@@ -16,7 +16,8 @@ import androidx.compose.ui.Modifier
 fun ButtonNavigationToolbar(
     onCancelClick: () -> Unit,
     onNextClick: () -> Unit,
-    isNextEnabled: Boolean
+    isNextEnabled: Boolean,
+    primaryTitle: String,
 ) {
     Box(
         modifier = Modifier
@@ -38,7 +39,7 @@ fun ButtonNavigationToolbar(
                 onClick = onNextClick,
                 enabled = isNextEnabled
             ) {
-                Text("Next")
+                Text(primaryTitle)
             }
         }
     }

@@ -18,5 +18,7 @@ interface JournalRepository {
 
     suspend fun fetchEntry(journalId: Int, entryId: Int): ApiResponse<Entry>
 
+    suspend fun createEntry(journalId: Int, entry: Entry): ApiResponse<Unit>
+
     suspend fun deleteEntry(journalId: Int, entryId: Int): ApiResponse<Unit>
 }

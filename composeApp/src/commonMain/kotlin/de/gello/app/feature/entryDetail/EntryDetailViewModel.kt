@@ -7,11 +7,14 @@ import com.skash.forge.outcome.onEachOutcome
 import de.gello.app.feature.entryDetail.EntryDetailState.Default
 import de.gello.app.feature.entryDetail.EntryDetailState.Intent
 import de.gello.app.util.BaseViewModel
+import de.gello.domain.model.GelEntry
 import de.gello.domain.usecase.entry.DeleteEntryUseCase
 import de.gello.domain.usecase.entry.FetchOneEntryUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromJsonElement
 
 class EntryDetailViewModel(
     private val journalId: Int,
@@ -31,8 +34,15 @@ class EntryDetailViewModel(
         onProgress = { setState(EntryDetailState.Loading) },
         onFailure = { showSnackbar(it.message) },
         onSuccess = { data ->
+            val gelEntry = data.content?.let {
+                Json.decodeFromJsonElement<GelEntry>(it)
+            }
+
             setState(
-                Default(entry = data)
+                Default(
+                    entry = data,
+                    gelEntry = gelEntry
+                )
             )
         }
     ).stateIn(
@@ -45,7 +55,7 @@ class EntryDetailViewModel(
         when (intent) {
             is Intent.NavigateUp -> dispatchNavigationEvent(NavigationEvent.NavigateUp)
 
-            is Default.Intent.DeleteButton -> handleIntent<_,_>(
+            is Default.Intent.DeleteButton -> handleIntent<_, _>(
                 intent = intent,
                 handler = ::handleDeleteEntry
             )

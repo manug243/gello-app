@@ -2,6 +2,7 @@ package de.gello.app.feature.journalDetail
 
 import de.gello.domain.model.Entry
 import de.gello.domain.model.Journal
+import de.gello.domain.model.User
 
 sealed interface JournalDetailState {
     sealed interface Intent {
@@ -14,6 +15,7 @@ sealed interface JournalDetailState {
 
     data class Default(
         val journal: Journal = Journal.emptyJournal,
+        val user: User = User.emptyUser,
         val query: String = "",
         val allEntries: List<Entry> = emptyList(),
         val showError: Boolean = false

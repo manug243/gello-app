@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 
 @Composable
-fun ImagePreview(byteArray: ByteArray) {
+fun ImagePreview(byteArray: ByteArray?) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

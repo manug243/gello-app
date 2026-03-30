@@ -4,12 +4,21 @@ import androidx.lifecycle.viewModelScope
 import com.skash.forge.navigation.NavigationEvent
 import com.skash.forge.outcome.collectOutcome
 import de.gello.app.util.BaseViewModel
+import de.gello.domain.model.Entry
 import de.gello.domain.model.GelImage
+import de.gello.domain.model.Journal
+import de.gello.domain.model.Lane
+import de.gello.domain.usecase.entry.CreateEntryUseCase
 import de.gello.domain.usecase.image.UploadGelImageUseCase
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToJsonElement
+import kotlin.io.encoding.Base64
 
 class EntryCreationViewModel(
-    private val uploadGelImageUseCase: UploadGelImageUseCase
+    private val journalId: Int,
+    private val uploadGelImageUseCase: UploadGelImageUseCase,
+    private val createEntryUseCase: CreateEntryUseCase
 ) : BaseViewModel<EntryCreationState, EntryCreationState.Intent>(
     initialState = EntryCreationState.FirstStep(
         draft = EntryDraft(),
@@ -28,7 +37,7 @@ class EntryCreationViewModel(
             }
 
             is EntryCreationState.FirstStep.Intent.SetEntryType -> updateDraft {
-                it.copy(typeId = intent.value.id)
+                it.copy(type = intent.value.name)
             }
 
             is EntryCreationState.FirstStep.Intent.ToSecondStep -> handleIntent<_, _>(
@@ -60,9 +69,57 @@ class EntryCreationViewModel(
                 handler = ::handleBackToSecondStep
             )
 
-            is EntryCreationState.ThirdStep.Intent.ToFourthStep -> {
-
+            is EntryCreationState.ThirdStep.Intent.SetLaneCount -> updateDraft {
+                it.copy(laneCount = intent.value)
             }
+
+            is EntryCreationState.ThirdStep.Intent.ToFourthStep -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleToFourthStepIntent
+            )
+
+            is EntryCreationState.FourthStep.Intent.ToThirdStep -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleBackToThirdStepIntent
+            )
+
+            is EntryCreationState.FourthStep.Intent.SaveEntry -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleSaveEntryIntent
+            )
+
+            is EntryCreationState.FourthStep.Intent.SetProbe -> updateDraft { draft ->
+                draft.copy(
+                    content = draft.content?.copy(
+                        tableData = draft.content.tableData.map { lane ->
+                            if (lane.lane == intent.lane) {
+                                lane.copy(probe = intent.value)
+                            } else {
+                                lane
+                            }
+                        }
+                    )
+                )
+            }
+
+            is EntryCreationState.FourthStep.Intent.SetVolume -> updateDraft { draft ->
+                draft.copy(
+                    content = draft.content?.copy(
+                        tableData = draft.content.tableData.map { lane ->
+                            if (lane.lane == intent.lane) {
+                                lane.copy(volume = intent.value.toIntOrNull())
+                            } else {
+                                lane
+                            }
+                        }
+                    )
+                )
+            }
+
+            is EntryCreationState.FourthStep.Intent.ShowDataTable -> handleIntent<_, _>(
+                intent = intent,
+                handler = ::handleShowDataTableIntent
+            )
         }
     }
 
@@ -102,14 +159,18 @@ class EntryCreationViewModel(
             }?.collectOutcome(
                 onProgress = { setState(EntryCreationState.Loading) },
                 onFailure = { showSnackbar(it.message) },
-                onSuccess = { imageBytes ->
+                onSuccess = { response ->
+                    val processedBytes = Base64.decode(response.processedImage)
                     setState(
                         EntryCreationState.ThirdStep(
-                            draft = state.draft,
+                            draft = state.draft.copy(
+                                content = response,
+                                laneCount = response.laneCount.toString()
+                            ),
                             optimizedImage = GelImage(
-                                data = imageBytes,
-                                name = "",
-                                fileType = ""
+                                data = processedBytes,
+                                name = "processed.png",
+                                fileType = "png"
                             ),
                             showError = state.showError
                         )
@@ -117,6 +178,108 @@ class EntryCreationViewModel(
                 }
             )
         }
+    }
+
+    private fun handleToFourthStepIntent(
+        state: EntryCreationState.ThirdStep,
+        intent: EntryCreationState.ThirdStep.Intent.ToFourthStep
+    ) {
+        val newLaneCount = state.draft.laneCount?.toIntOrNull()
+            ?: state.draft.content?.laneCount
+            ?: 0
+
+        val updatedTableData = buildLaneTableData(newLaneCount)
+
+        val updatedContent = state.draft.content?.copy(
+            laneCount = newLaneCount,
+            tableData = updatedTableData
+        )
+
+        setState(
+            EntryCreationState.FourthStep(
+                draft = state.draft.copy(content = updatedContent),
+                showError = state.showError
+            )
+        )
+    }
+
+    private fun handleBackToThirdStepIntent(
+        state: EntryCreationState.FourthStep,
+        intent: EntryCreationState.FourthStep.Intent.ToThirdStep
+    ) {
+        val processedBytes = state.draft.content?.processedImage
+            ?.let { Base64.decode(it) }
+
+        setState(
+            EntryCreationState.ThirdStep(
+                draft = state.draft,
+                optimizedImage = processedBytes?.let {
+                    GelImage(
+                        data = it,
+                        name = "processed.png",
+                        fileType = "png"
+                    )
+                },
+                showError = state.showError
+            )
+        )
+    }
+
+    private fun handleSaveEntryIntent(
+        state: EntryCreationState.FourthStep,
+        intent: EntryCreationState.FourthStep.Intent.SaveEntry
+    ) {
+        val content = state.draft.content ?: return
+
+        val entry = Entry(
+            journalId = journalId,
+            name = state.draft.title,
+            type = state.draft.type,
+            content = Json.encodeToJsonElement(content)
+        )
+
+        viewModelScope.launch {
+            createEntryUseCase(
+                CreateEntryUseCase.Params(entry)
+            ).collectOutcome(
+                onProgress = {
+                    setState(EntryCreationState.Loading)
+                },
+                onFailure = {
+                    showSnackbar(it.message)
+                },
+                onSuccess = {
+                    dispatchNavigationEvent(NavigationEvent.NavigateUp)
+                }
+            )
+        }
+    }
+
+    private fun handleShowDataTableIntent(
+        state: EntryCreationState.FourthStep,
+        intent: EntryCreationState.FourthStep.Intent.ShowDataTable
+    ) {
+        val updatedTableData = state.draft.content?.tableData?.map { lane ->
+            if (intent.value) {
+                lane
+            } else {
+                lane.copy(
+                    probe = "",
+                    volume = null
+                )
+            }
+        }
+
+        setState(
+            state.copy(
+                showTable = intent.value,
+                draft = state.draft.copy(
+                    content = state.draft.content?.copy(
+                        tableData = updatedTableData ?: emptyList()
+                    )
+                )
+            )
+        )
     }
 
     private fun handleBackToSecondStep(
@@ -150,6 +313,7 @@ class EntryCreationViewModel(
             is EntryCreationState.FirstStep -> s.draft
             is EntryCreationState.SecondStep -> s.draft
             is EntryCreationState.ThirdStep -> s.draft
+            is EntryCreationState.FourthStep -> s.draft
             else -> return
         }
 
@@ -159,8 +323,19 @@ class EntryCreationViewModel(
             is EntryCreationState.FirstStep -> s.copy(draft = newDraft)
             is EntryCreationState.SecondStep -> s.copy(draft = newDraft)
             is EntryCreationState.ThirdStep -> s.copy(draft = newDraft)
+            is EntryCreationState.FourthStep -> s.copy(draft = newDraft)
             else -> s
         }
         setState(newState)
+    }
+}
+
+private fun buildLaneTableData(count: Int): List<Lane> {
+    return (0 until count).map { index ->
+        Lane(
+            lane = ('A' + index).toString(),
+            probe = "",
+            volume = null
+        )
     }
 }
