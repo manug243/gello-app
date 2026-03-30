@@ -55,7 +55,7 @@ internal fun EntryCreationFirstStepPage(
                 items = state.entryOptions,
                 placeholder = "Select entry type",
                 value = { it.title },
-                selectedItem = state.entryOptions.find { it.id == state.draft.typeId },
+                selectedItem = state.entryOptions.find { it.name == state.draft.type },
                 onItemSelected = { item ->
                     onSelectedItem(item)
                 }
@@ -69,7 +69,8 @@ internal fun EntryCreationFirstStepPage(
             ButtonNavigationToolbar(
                 onCancelClick = onCancelClick,
                 onNextClick = onNextStepClick,
-                isNextEnabled = state.allFirstFieldsFilled
+                isNextEnabled = state.allFirstFieldsFilled,
+                primaryTitle = "Next"
             )
 
             StepProgressIndicator(

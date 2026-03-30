@@ -79,17 +79,24 @@ internal fun JournalDetailPage(
             }
 
             state.allEntries.forEach { entry ->
+                println("ENTRY CARD -> journalId=${entry.journalId}, entryId=${entry.id}, name=${entry.name}")
+
 
                 val entryIcon = EntryEnum.entries.firstOrNull { it.id == entry.id }
                     ?: EntryEnum.NOTE
 
                 EntryCard(
                     title = entry.name,
-                    owner = "",
-                    updatedAt = DateHelper.formatDateString(entry.updatedAt),
+                    owner = "${state.user.firstname} ${state.user.lastname}",
+                    createdAt = DateHelper.formatDateString(entry.createdAt),
                     indicatorColor = state.journal.color,
                     entryType = entryIcon,
-                    onClick = { onEntryClick(entry.journalId ?: 1,entry.id) } // need to fix, when be updated with projectId
+                    onClick = {
+                        onEntryClick(
+                            state.journal.id,
+                            entry.id ?: 0
+                        )
+                    }
                 )
             }
 
@@ -108,7 +115,7 @@ internal fun JournalDetailPage(
 fun EntryCard(
     title: String,
     owner: String,
-    updatedAt: String,
+    createdAt: String,
     indicatorColor: String,
     entryType: EntryEnum,
     onClick: () -> Unit
@@ -188,7 +195,7 @@ fun EntryCard(
                 Spacer(Modifier.width(Spacing.ExtraSmall))
 
                 Text(
-                    text = updatedAt,
+                    text = createdAt,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

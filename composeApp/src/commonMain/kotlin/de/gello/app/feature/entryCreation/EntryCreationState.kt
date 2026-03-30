@@ -1,13 +1,15 @@
 package de.gello.app.feature.entryCreation
 
+import de.gello.domain.model.GelEntry
 import de.gello.domain.model.GelImage
 import de.gello.util.enums.EntryEnum
 
 data class EntryDraft(
     val title: String = "",
-    val typeId: Int? = null,
+    val type: String? = null,
     val gelImage: GelImage? = null,
-    val content: String? = "" // will be a json
+    val content: GelEntry? = null,
+    val laneCount: String? = null
 )
 
 sealed class EntryCreationState {
@@ -35,7 +37,7 @@ sealed class EntryCreationState {
         val allFirstFieldsFilled: Boolean
             get() {
                 val titleFilled = draft.title.isNotBlank()
-                val typeChosen = draft.typeId != null
+                val typeChosen = draft.type != null
 
                 return titleFilled && typeChosen
             }
@@ -64,8 +66,23 @@ sealed class EntryCreationState {
         val showError: Boolean = false
     ) : EntryCreationState() {
         sealed interface Intent : EntryCreationState.Intent {
+            data class SetLaneCount(val value: String) : Intent
             data object ToSecondStep : Intent
             data object ToFourthStep : Intent
+        }
+    }
+
+    data class FourthStep(
+        override val draft: EntryDraft,
+        val showTable: Boolean = false,
+        val showError: Boolean = false
+    ) : EntryCreationState() {
+        sealed interface Intent : EntryCreationState.Intent {
+            data class SetProbe(val lane: String, val value: String) : Intent
+            data class SetVolume(val lane: String, val value: String) : Intent
+            data class ShowDataTable(val value: Boolean) : Intent
+            data object ToThirdStep : Intent
+            data object SaveEntry : Intent
         }
     }
 }

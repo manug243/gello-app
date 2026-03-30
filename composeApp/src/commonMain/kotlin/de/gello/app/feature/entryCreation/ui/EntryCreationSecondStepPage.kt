@@ -42,14 +42,14 @@ internal fun EntryCreationSecondStepPage(
         Column(
             verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
         ) {
-            when (state.draft.typeId) {
-                EntryEnum.IMAGE.id -> GelImagePage(
+            when (state.draft.type) {
+                EntryEnum.IMAGE.name -> GelImagePage(
                     state = state,
                     onSelectedImage = selectedImage,
                     onCropCancelClick = onCropCancelClick
                 )
 
-                EntryEnum.NOTE.id -> NotesPage()
+                EntryEnum.NOTE.name -> NotesPage()
             }
         }
 
@@ -61,7 +61,8 @@ internal fun EntryCreationSecondStepPage(
             ButtonNavigationToolbar(
                 onCancelClick = onCancelClick,
                 onNextClick = { state.draft.gelImage?.let { onNextStepClick(it) } },
-                isNextEnabled = state.imageSelected
+                isNextEnabled = state.imageSelected,
+                primaryTitle = "Next"
             )
 
             StepProgressIndicator(

@@ -4,11 +4,15 @@ import androidx.lifecycle.viewModelScope
 import com.skash.forge.navigation.NavigationEvent
 import com.skash.forge.outcome.collectOutcome
 import com.skash.forge.outcome.onEachOutcome
+import com.skash.forge.usecase.invoke
 import de.gello.app.event.UIEvent
+import de.gello.app.feature.journalCreation.JournalCreationState
 import de.gello.app.feature.journalDetail.JournalDetailState.Default
 import de.gello.app.feature.journalDetail.JournalDetailState.Intent
 import de.gello.app.navigation.Screen
 import de.gello.app.util.BaseViewModel
+import de.gello.domain.model.User
+import de.gello.domain.usecase.FetchUserUseCase
 import de.gello.domain.usecase.journal.DeleteJournalUseCase
 import de.gello.domain.usecase.journal.FetchOneJournalUseCase
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,11 +22,28 @@ import kotlinx.coroutines.launch
 class JournalDetailViewModel(
     private val journalId: Int,
     private val fetchOneJournalUseCase: FetchOneJournalUseCase,
-    private val deleteJournalUseCase: DeleteJournalUseCase
+    private val deleteJournalUseCase: DeleteJournalUseCase,
+    fetchUserUseCase: FetchUserUseCase
 ) : BaseViewModel<JournalDetailState, Intent>(
     initialState = Default(),
     useEventBus = false
 ) {
+    private var loadedUser: User? = null
+
+    private val userData = fetchUserUseCase()
+        .onEachOutcome(
+            onProgress = { setState(JournalDetailState.Loading) },
+            onFailure = { showSnackbar(it.message) },
+            onSuccess = { user ->
+                loadedUser = user
+            }
+        )
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = null
+        )
+
     internal fun refreshEntries() {
         viewModelScope.launch {
             fetchOneJournalUseCase(
@@ -35,6 +56,7 @@ class JournalDetailViewModel(
                     setState(
                         Default(
                             journal = data,
+                            user = loadedUser ?: User.emptyUser,
                             allEntries = data.entries
                         )
                     )
@@ -52,6 +74,7 @@ class JournalDetailViewModel(
             setState(
                 Default(
                     journal = data,
+                    user = loadedUser ?: User.emptyUser,
                     allEntries = data.entries
                 )
             )
@@ -67,7 +90,9 @@ class JournalDetailViewModel(
             is Intent.NavigateUp -> dispatchNavigationEvent(NavigationEvent.NavigateUp)
 
             is Intent.NavigateToEntryCreation ->
-                dispatchNavigationEvent(NavigationEvent.NavigateTo(Screen.EntryCreation))
+                dispatchNavigationEvent(
+                    NavigationEvent.NavigateTo(Screen.EntryCreation(journalId))
+                )
 
             is Intent.NavigateToEntry -> dispatchNavigationEvent(
                 NavigationEvent.NavigateTo(

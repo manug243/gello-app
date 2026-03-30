@@ -1,23 +1,25 @@
 package de.gello.domain.model
 
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
+
+@Serializable
 data class Entry(
-    val id: Int,
+    val id: Int? = null,
     val journalId: Int? = null,
     val name: String,
-    val owner: String,
-    val createdAt: String,
+    val owner: String? = null,
+    val createdAt: String? = "",
     val updatedAt: String? = "",
-    val typeId: Int? = null
+    val type: String? = null,
+    val content: JsonElement? = null
 ) {
     companion object {
         val emptyEntry = Entry(
-            id = -1,
-            journalId = null,
             name = "",
             owner = "",
             createdAt = "",
-            updatedAt = "",
-            typeId = -1
+            updatedAt = ""
         )
     }
 }

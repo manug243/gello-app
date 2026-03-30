@@ -79,8 +79,6 @@ private fun DefaultsPage(
             )
         }
     ) {
-        EntryDetailPage(
-
-        )
+        EntryDetailPage(state = state)
     }
 }

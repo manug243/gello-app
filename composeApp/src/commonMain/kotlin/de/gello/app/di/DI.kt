@@ -31,6 +31,7 @@ import de.gello.domain.usecase.LoginUseCase
 import de.gello.domain.usecase.LogoutUseCase
 import de.gello.domain.usecase.ObserveIsUserLoggedInUseCase
 import de.gello.domain.usecase.RegisterUserUseCase
+import de.gello.domain.usecase.entry.CreateEntryUseCase
 import de.gello.domain.usecase.entry.DeleteEntryUseCase
 import de.gello.domain.usecase.entry.FetchOneEntryUseCase
 import de.gello.domain.usecase.image.UploadGelImageUseCase
@@ -93,4 +94,5 @@ val appModule = module {
     factory { DeleteEntryUseCase(get()) }
     factory { DeleteJournalUseCase(get()) }
     factory { UploadGelImageUseCase(get()) }
+    factory { CreateEntryUseCase(get()) }
 }

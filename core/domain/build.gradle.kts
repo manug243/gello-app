@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -52,6 +53,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.datetime)
                 api(libs.filekit.dialogs.compose)
+                implementation(libs.kotlinx.serialization.json)
 
                 api(libs.forge.usecase)
                 implementation(libs.forge.network.core.response)

@@ -10,7 +10,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import de.gello.app.event.UIEvent
 import de.gello.app.event.UIEventHandler
+import de.gello.app.feature.entryCreation.EntryCreationState.ThirdStep.Intent
 import de.gello.app.feature.entryCreation.ui.EntryCreationFirstStepPage
+import de.gello.app.feature.entryCreation.ui.EntryCreationFourthStepPage
 import de.gello.app.feature.entryCreation.ui.EntryCreationSecondStepPage
 import de.gello.app.feature.entryCreation.ui.EntryCreationThirdStepPage
 import de.gello.designsystem.component.CoveringProgressIndicator
@@ -53,6 +55,12 @@ fun EntryCreationScreenImpl(
             )
 
             is EntryCreationState.ThirdStep -> ThirdPage(
+                snackBarHost = snackBarHost,
+                state = state,
+                executeIntent = executeIntent
+            )
+
+            is EntryCreationState.FourthStep -> FourthPage(
                 snackBarHost = snackBarHost,
                 state = state,
                 executeIntent = executeIntent
@@ -142,18 +150,60 @@ private fun ThirdPage(
             TopAppBarWithBackNavigation(
                 title = "Edit your image",
                 onNavigateBack = {
-                    executeIntent(EntryCreationState.ThirdStep.Intent.ToSecondStep)
+                    executeIntent(Intent.ToSecondStep)
                 }
             )
         }
     ) {
         EntryCreationThirdStepPage(
             state = state,
+            onLaneCountChange = {
+                executeIntent(Intent.SetLaneCount(it))
+            },
             onCancelClick = {
                 executeIntent(EntryCreationState.Intent.NavigateUp)
             },
             onNextStepClick = {
+                executeIntent(Intent.ToFourthStep)
+            }
+        )
+    }
+}
 
+@Composable
+private fun FourthPage(
+    snackBarHost: @Composable () -> Unit = {},
+    state: EntryCreationState.FourthStep,
+    executeIntent: (EntryCreationState.Intent) -> Unit
+) {
+    ScreenScaffold(
+        snackbarHost = snackBarHost,
+        topBar = {
+            TopAppBarWithBackNavigation(
+                title = "Edit your gel entry",
+                onNavigateBack = {
+                    executeIntent(EntryCreationState.FourthStep.Intent.ToThirdStep)
+                }
+            )
+        }
+    ) {
+        EntryCreationFourthStepPage(
+            state = state,
+            onCancelClick = {
+                executeIntent(EntryCreationState.Intent.NavigateUp)
+            },
+            onSaveClick = {
+                executeIntent(EntryCreationState.FourthStep.Intent.SaveEntry)
+            },
+            onProbeChange = { lane, value ->
+                executeIntent(EntryCreationState.FourthStep.Intent.SetProbe(lane, value))
+
+            },
+            onVolumeChange = { lane, value ->
+                executeIntent(EntryCreationState.FourthStep.Intent.SetVolume(lane, value))
+            },
+            onShowTableChange = {
+                executeIntent(EntryCreationState.FourthStep.Intent.ShowDataTable(it))
             }
         )
     }
