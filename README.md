@@ -80,7 +80,7 @@ UI → Intent → ViewModel → UseCase → Repository → API
 
 ## Setup
 
-## Backend Setup
+### Backend Setup
 
 ### 1. Clone the project
 
@@ -102,7 +102,7 @@ Make sure you have the correct python version installed → 3.12.
 
 ```make run```
 
-## Frontend Setup
+### Frontend Setup
 
 ### 1. Open Project
 
