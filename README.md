@@ -15,7 +15,7 @@ This project demonstrates a modern, production-ready KMP setup using the followi
 *   **UI Framework**: [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) (Jetpack Compose for iOS, Android, and Desktop).
 *   **Dependency Injection**: [Koin](https://insert-koin.io/) (with BOM support, Compose, and ViewModel integration).
 *   **Database**: [Room](https://developer.android.com/kotlin/multiplatform/room) (SQLite) for cross-platform local persistence.
-*   **Networking & Architecture**: Powered by the **Forge** framework for:
+*   **Networking & Architecture**: Powered by the [**Forge**](https://github.com/SkashEU/forge) framework for:
     *   Type-safe API clients (Ktor-based).
     *   Structured UseCase patterns.
     *   Unified Navigation (Nav2).
@@ -80,7 +80,7 @@ The project follows a modularized **Clean Architecture** approach:
 
 ### Frontend Setup
 1.  **Open in Android Studio** (or IntelliJ IDEA for Desktop/iOS).
-2.  **Forge Framework Credentials**: To use the Forge framework, you need to add your GitHub Packages credentials to your `gradle.properties` (or global `~/.gradle/gradle.properties`). The token (`gpr.key`) only requires **read** permissions for packages.
+2.  **Forge Framework Credentials**: To use the [Forge](https://github.com/SkashEU/forge) framework, you need to add your GitHub Packages credentials to your `gradle.properties` (or global `~/.gradle/gradle.properties`). The token (`gpr.key`) only requires **read** permissions for packages.
     ```properties
     gpr.user=YOUR_GITHUB_USERNAME
     gpr.key=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN
