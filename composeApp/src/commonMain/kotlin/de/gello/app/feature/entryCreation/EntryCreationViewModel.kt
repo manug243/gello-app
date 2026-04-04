@@ -6,7 +6,6 @@ import com.skash.forge.outcome.collectOutcome
 import de.gello.app.util.BaseViewModel
 import de.gello.domain.model.Entry
 import de.gello.domain.model.GelImage
-import de.gello.domain.model.Journal
 import de.gello.domain.model.Lane
 import de.gello.domain.usecase.entry.CreateEntryUseCase
 import de.gello.domain.usecase.image.UploadGelImageUseCase

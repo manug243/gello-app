@@ -16,10 +16,8 @@ enum class EntryEnum(
     UNKNOWN(-1, Icons.Outlined.DeviceUnknown, "Unknown");
 
     companion object {
-        fun findTitleById(typeId: Int?): String? {
-            return EntryEnum.entries
-                .find { it.id == typeId }
-                ?.title
+        fun fromType(type: String?): EntryEnum {
+            return entries.firstOrNull { it.name == type } ?: NOTE
         }
     }
 }

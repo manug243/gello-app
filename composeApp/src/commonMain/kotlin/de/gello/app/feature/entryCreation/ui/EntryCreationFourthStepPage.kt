@@ -14,10 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -58,6 +55,13 @@ internal fun EntryCreationFourthStepPage(
                 }
 
                 ImagePreview(bytes)
+            }
+
+            state.draft.content?.note?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
 
             state.draft.content?.tableData?.let { lanes ->
@@ -186,7 +190,7 @@ private fun GelTableRow(
 
         TextField(
             value = lane.probe,
-            placeholder = "Probe",
+            placeholder = "Sample",
             onValueChanged = { onProbeChange(lane.lane, it) },
             modifier = Modifier.weight(4f)
         )
@@ -215,7 +219,7 @@ private fun GelTableHeader() {
             style = MaterialTheme.typography.titleSmall
         )
         Text(
-            text = "Probe",
+            text = "Sample",
             modifier = Modifier.weight(4f),
             style = MaterialTheme.typography.titleSmall
         )

@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.gello.app.feature.journalDetail.JournalDetailState
+import de.gello.designsystem.component.EntryCard
 import de.gello.designsystem.component.PageWithPaddingSlot
 import de.gello.designsystem.component.SearchField
 import de.gello.designsystem.theme.Spacing
@@ -82,8 +83,7 @@ internal fun JournalDetailPage(
                 println("ENTRY CARD -> journalId=${entry.journalId}, entryId=${entry.id}, name=${entry.name}")
 
 
-                val entryIcon = EntryEnum.entries.firstOrNull { it.id == entry.id }
-                    ?: EntryEnum.NOTE
+                val entryIcon = EntryEnum.fromType(entry.type)
 
                 EntryCard(
                     title = entry.name,
@@ -106,98 +106,6 @@ internal fun JournalDetailPage(
                 exit = fadeOut()
             ) {
                 Text(emptyText.orEmpty())
-            }
-        }
-    }
-}
-
-@Composable
-fun EntryCard(
-    title: String,
-    owner: String,
-    createdAt: String,
-    indicatorColor: String,
-    entryType: EntryEnum,
-    onClick: () -> Unit
-) {
-    val parsedColor = parseHexColor(indicatorColor)
-
-    ElevatedCard(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .clickable(onClick = onClick),
-        elevation = CardDefaults.cardElevation(defaultElevation = Spacing.Medium)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(40.dp)
-                .padding(horizontal = Spacing.Medium),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium
-            )
-
-            Spacer(Modifier.weight(1f))
-
-            Icon(
-                modifier = Modifier.size(18.dp),
-                imageVector = entryType.icon,
-                contentDescription = null
-            )
-        }
-
-        HorizontalDivider(
-            thickness = 2.dp,
-            color = parsedColor
-        )
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(40.dp)
-                .padding(horizontal = Spacing.Medium),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    modifier = Modifier.size(16.dp),
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = null
-                )
-
-                Spacer(Modifier.width(Spacing.ExtraSmall))
-
-                Text(
-                    text = owner,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    modifier = Modifier.size(16.dp),
-                    imageVector = Icons.Outlined.Edit,
-                    contentDescription = null
-                )
-
-                Spacer(Modifier.width(Spacing.ExtraSmall))
-
-                Text(
-                    text = createdAt,
-                    style = MaterialTheme.typography.bodyMedium
-                )
             }
         }
     }

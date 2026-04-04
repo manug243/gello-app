@@ -48,6 +48,13 @@ internal fun EntryDetailPage(
                 ImagePreview(bytes)
             }
 
+            state.gelEntry?.note?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
             state.gelEntry?.tableData
                 ?.takeIf { lanes ->
                     lanes.any{ it.probe.isNotBlank() || it.volume != null }
@@ -105,7 +112,7 @@ private fun GelTableHeader() {
         )
 
         Text(
-            text = "Probe",
+            text = "Sample",
             modifier = Modifier.weight(4f),
             style = MaterialTheme.typography.titleSmall
         )
