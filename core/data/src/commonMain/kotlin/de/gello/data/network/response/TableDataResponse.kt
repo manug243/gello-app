@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 data class TableDataResponse(
     @SerialName("lane")
     val lane: String,
-    @SerialName("probe")
-    val probe: String,
+    @SerialName("sample")
+    val sample: String,
     @SerialName("volume")
     val volume: String? = null
 )

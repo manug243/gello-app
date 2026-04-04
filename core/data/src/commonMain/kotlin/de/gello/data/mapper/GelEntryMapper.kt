@@ -17,6 +17,6 @@ internal fun GelResponse.toGelEntry(): GelEntry =
 internal fun TableDataResponse.toTableData(): Lane =
     Lane(
         lane = lane,
-        probe = probe,
+        probe = sample,
         volume = volume?.toIntOrNull()
     )
