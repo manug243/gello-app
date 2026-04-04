@@ -103,7 +103,7 @@ kotlin {
 buildkonfig {
     packageName = "de.gello"
     defaultConfigs {
-        buildConfigField(STRING, "BASE_URL", "http://192.168.164.165:8080/api") //needs to be changed to actual server ip or your network ip for testing
+        buildConfigField(STRING, "BASE_URL", "http://127.0.0.1:8080/api")
     }
 }
 
