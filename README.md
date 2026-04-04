@@ -80,8 +80,13 @@ The project follows a modularized **Clean Architecture** approach:
 
 ### Frontend Setup
 1.  **Open in Android Studio** (or IntelliJ IDEA for Desktop/iOS).
-2.  **Update IP**: In `core:data` (build.gradle), set your machine's local IP (don't use localhost for mobile emulators).
-3.  **Sync Gradle** and select your target:
+2.  **Forge Framework Credentials**: To use the Forge framework, you need to add your GitHub Packages credentials to your `gradle.properties` (or global `~/.gradle/gradle.properties`). The token (`gpr.key`) only requires **read** permissions for packages.
+    ```properties
+    gpr.user=YOUR_GITHUB_USERNAME
+    gpr.key=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN
+    ```
+3.  **Update IP**: In `core:data` (build.gradle), set your machine's local IP (don't use localhost for mobile emulators).
+4.  **Sync Gradle** and select your target:
     *   `androidApp`
     *   `iosApp` (Requires macOS & Xcode)
     *   `desktopApp` (Runs via JVM)
