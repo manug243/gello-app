@@ -1,5 +1,7 @@
 # Gello
 
+> **Hinweis:** Gello ist ein Schulprojekt und eine Demo, kein aktiv gepflegtes Produkt. Das Backend (Django) und der Gel-Analyse-Service sind nicht Teil dieses Repositories.
+
 Gello is a full-stack application for managing scientific journal entries with a focus on gel image analysis. It leverages the power of **Kotlin Multiplatform** to share logic across mobile and desktop platforms.
 
 * **Frontend**: Compose Multiplatform (Android, iOS, and Desktop)
@@ -10,7 +12,7 @@ Gello is a full-stack application for managing scientific journal entries with a
 
 ## Compose Multiplatform Capabilities
 
-This project demonstrates a modern, production-ready KMP setup using the following ecosystem:
+This project demonstrates a Kotlin Multiplatform setup using the following ecosystem:
 
 *   **UI Framework**: [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) (Jetpack Compose for iOS, Android, and Desktop).
 *   **Dependency Injection**: [Koin](https://insert-koin.io/) (with BOM support, Compose, and ViewModel integration).
@@ -73,14 +75,12 @@ The project follows a modularized **Clean Architecture** approach:
 
 ## Setup
 
-### Backend Setup
-1.  **Clone the project**.
-2.  **Install Python 3.12**.
-3.  `make setup` → `make migrate` → `make run`.
+### Backend
+The Django backend lives outside of this repository. The app expects it at the `BASE_URL` configured in `core/data/build.gradle.kts` (default: `http://127.0.0.1:8080/api`).
 
 ### Frontend Setup
 1.  **Open in Android Studio** (or IntelliJ IDEA for Desktop/iOS).
-2.  **Forge Framework Credentials**: To use the [Forge](https://github.com/SkashEU/forge) framework, you need to add your GitHub Packages credentials to your `gradle.properties` (or global `~/.gradle/gradle.properties`). The token (`gpr.key`) only requires **read** permissions for packages.
+2.  **Forge Framework Credentials**: To use the [Forge](https://github.com/SkashEU/forge) framework, you need to add your GitHub Packages credentials to your `gradle.properties` (preferably the global `~/.gradle/gradle.properties`, so credentials are never committed). The token (`gpr.key`) only requires **read** permissions for packages.
     ```properties
     gpr.user=YOUR_GITHUB_USERNAME
     gpr.key=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN
@@ -90,3 +90,5 @@ The project follows a modularized **Clean Architecture** approach:
     *   `androidApp`
     *   `iosApp` (Requires macOS & Xcode)
     *   `desktopApp` (Runs via JVM)
+
+> The build instructions above have not been re-verified recently.
