@@ -91,4 +91,4 @@ The Django backend lives outside of this repository. The app expects it at the `
     *   `iosApp` (Requires macOS & Xcode)
     *   `desktopApp` (Runs via JVM)
 
-> The build instructions above have not been re-verified recently.
+> Verified: the Desktop (JVM) target compiles with `./gradlew :composeApp:compileKotlinJvm` (Gradle wrapper, JDK 21, Forge credentials set as described above). The Android and iOS targets and the backend connection were not re-tested.
