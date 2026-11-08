@@ -1,6 +1,6 @@
 # Gello
 
-> **Hinweis:** Gello ist ein Schulprojekt und eine Demo, kein aktiv gepflegtes Produkt. Das Backend (Django) und der Gel-Analyse-Service sind nicht Teil dieses Repositories.
+> **Note:** Gello is a school project and a demo, not an actively maintained product. The Django backend and the gel analysis service are not part of this repository.
 
 Gello is a full-stack application for managing scientific journal entries with a focus on gel image analysis. It leverages the power of **Kotlin Multiplatform** to share logic across mobile and desktop platforms.
 
